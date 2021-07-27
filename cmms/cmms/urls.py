@@ -5,7 +5,7 @@ from django.conf.urls import url
 from django.views.static import serve
 from django.conf import settings
 from django.conf.urls.static import static
-#This is my comment
+#This is Khloud comment
 # Up two folders to serve "site" content
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
