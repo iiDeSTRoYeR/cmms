@@ -26,3 +26,5 @@ urlpatterns = [
         name='site_path'
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#Test by Ahmed v1
