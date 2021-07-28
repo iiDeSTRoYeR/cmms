@@ -9,5 +9,9 @@ admin.site.register(Tool)
 admin.site.register(Strike)
 admin.site.register(StrikeDetail)
 admin.site.register(LocationsLog)
+admin.site.register(Nationality)
+admin.site.register(JobTitle)
+
+
 
 
