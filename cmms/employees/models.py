@@ -1,8 +1,9 @@
 from django.db import models
 
 
+
 class Member(models.Model):
-    National_ID = models.IntegerField(null=False,unique=True, primary_key=True)
+    National_ID = models.IntegerField(null=False, unique=True, primary_key=True)
     Name = models.CharField(max_length=50,unique=True)
     DoB = models.DateField(default=None)
     PassportNo = models.IntegerField(null=False,unique=True)
