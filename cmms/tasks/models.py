@@ -12,11 +12,11 @@ class JobOrder(models.Model):
     rate_scale = [
         ('Unacceptable', 1), ('Poor', 2), ('Fair', 3), ('Good', 4), ('Excellent', 5)
     ]
-    Title = models.CharField(max_length=128, validators=[MinLengthValidator(10,'Name Must be 10 characters.')])
+    Title = models.CharField(max_length=128, validators=[MinLengthValidator(10,'Title Must be 10 characters.')])
     deviceasset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
     OpenDate = models.DateTimeField(null=True, blank=True)
     CloseDate = models.DateTimeField(blank=True, null=True)  # if blank then status is open
-    ProblemDesc = models.TextField(max_length=500, validators=[MinLengthValidator(20,'Name Must be 20 characters.')])
+    ProblemDesc = models.TextField(max_length=500, validators=[MinLengthValidator(20,'Problem description Must be 20 characters.')])
     Rating = models.IntegerField(null=True, blank=True, choices=rate_scale)
     Notes = models.TextField(null=True, blank=True)
     #members = models.ManyToManyField('employees.Member', through='JobRole', through_fields=('joborder', 'member'))
