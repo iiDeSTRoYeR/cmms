@@ -45,8 +45,7 @@ class Consumable (models.Model):
         return "Cost Type " + str(self.CostType) + " price is:" + str(self.Price)
 
 
-def fun(x):
-    return x
+
 
 
 
