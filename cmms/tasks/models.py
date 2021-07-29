@@ -19,8 +19,14 @@ class JobOrder(models.Model):
     ProblemDesc = models.TextField(max_length=500, validators=[MinLengthValidator(20,'Name Must be 20 characters.')])
     Rating = models.IntegerField(null=True, blank=True, choices=rate_scale)
     Notes = models.TextField(null=True, blank=True)
-    members = models.ManyToManyField('employees.Member', through='JobRole', through_fields=('joborder', 'member'))
+    #members = models.ManyToManyField('employees.Member', through='JobRole', through_fields=('joborder', 'member'))
+    members = models.ManyToManyField(User, through='JobRole', through_fields=('joborder', 'member'))
     generalsps = models.ManyToManyField('spareparts.GeneralSP')
+
+    def save(self, *args, **kwargs):
+        if self.OpenDate is None:
+            self.OpenDate = datetime.now()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.Title
@@ -29,8 +35,12 @@ class PPM(models.Model):
     deviceAsset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
     CurrentPPM = models.DateTimeField(blank=True, null=True)
     FuturePPM = models.DateTimeField(null=True, blank=True)  # from the Device Table
-    members = models.ManyToManyField('employees.Member', through='PPMRole', through_fields=('ppm', 'member'))
-
+    #members = models.ManyToManyField('employees.Member', through='PPMRole', through_fields=('ppm', 'member'))
+    members = models.ManyToManyField(User, through='PPMRole', through_fields=('ppm', 'member'))
+    def save(self, *args, **kwargs):
+        if self.CurrentPPM is None:
+            self.CurrentPPM = datetime.now()
+        super().save(*args, **kwargs)
     @staticmethod
     def ppmCycleVal(deviceasset):
         Query1 = DeviceAsset.objects.get(pk=deviceasset)
@@ -50,7 +60,8 @@ class roleName(models.Model):
 
 class JobRole(models.Model):
     joborder = models.ForeignKey(JobOrder, on_delete=models.CASCADE)
-    member = models.ForeignKey('employees.Member', on_delete=models.SET_NULL, null=True)
+    #member = models.ForeignKey('employees.Member', on_delete=models.SET_NULL, null=True)
+    member = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     role = models.ForeignKey(roleName, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -58,7 +69,8 @@ class JobRole(models.Model):
 
 class PPMRole(models.Model):
     ppm = models.ForeignKey(PPM, on_delete=models.CASCADE)
-    member = models.ForeignKey('employees.Member', on_delete=models.SET_NULL, null=True)
+    #member = models.ForeignKey('employees.Member', on_delete=models.SET_NULL, null=True)
+    member = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     role = models.ForeignKey(roleName, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):

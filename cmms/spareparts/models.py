@@ -35,8 +35,8 @@ class Sparepart(models.Model):
     PurQTY = models.IntegerField(default=0)
     StbyQTY = models.IntegerField(default=0)
     InstallQTY = models.IntegerField(default=0)
-    Purchase_Period = models.IntegerField(null=True, blank=True)
-    GeneralSP_PDF = models.FileField()  # need to define file structure
+    #Purchase_Period = models.IntegerField(null=True, blank=True)
+    SparePartPDF = models.FileField(upload_to="spareparts/SparePart/")
     Price = models.DecimalField(decimal_places=2, max_digits=9)
     Notes = models.TextField(null=True, blank=True, max_length=500)
     spstatus = models.ForeignKey(SpStatus, on_delete=models.SET_NULL, null=True)
