@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
-
 class CostClass (models.Model):
     x = [
         ('محروقات','محروقات'),('ايجار','ايجار'),('مواصلات','مواصلات'),('مستهلكات','مستهلكات'),
@@ -43,8 +42,11 @@ class Consumable (models.Model):
 
 
     def __str__(self):
-        return "Cost Type " + str(self.CostType) + " price is:" + str(self.Price)
+        return "Cost Type " + str(self.CostType) + " price is :" + str(self.Price)
 
+
+def fun(x):
+    return x
 
 
 
