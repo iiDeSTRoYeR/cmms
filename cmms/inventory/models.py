@@ -122,6 +122,4 @@ class DeviceAsset(models.Model):
     DeviceStatus = models.ForeignKey(DeviceStatus, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        #space
-        #space++
         return str(self.Asset_No)

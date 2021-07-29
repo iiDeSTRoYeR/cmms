@@ -2,18 +2,21 @@ from django.db import models
 from datetime import datetime, timedelta
 #from django.apps import apps
 #Device = apps.get_model('inventory', 'Device')
+from django.core.validators import MinLengthValidator
 from inventory.models import DeviceAsset
+from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class JobOrder(models.Model):
     rate_scale = [
         ('Unacceptable', 1), ('Poor', 2), ('Fair', 3), ('Good', 4), ('Excellent', 5)
     ]
-    Title = models.CharField(max_length=128)
-    DeviceAsset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
-    OpenDate = models.DateTimeField(auto_now_add=True, blank=True)
-    CloseDate = models.DateTimeField(blank=True)  # if blank then status is open
-    ProblemDesc = models.TextField(max_length=500)
+    Title = models.CharField(max_length=128, validators=[MinLengthValidator(10,'Name Must be 10 characters.')])
+    deviceasset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
+    OpenDate = models.DateTimeField(null=True, blank=True)
+    CloseDate = models.DateTimeField(blank=True, null=True)  # if blank then status is open
+    ProblemDesc = models.TextField(max_length=500, validators=[MinLengthValidator(20,'Name Must be 20 characters.')])
     Rating = models.IntegerField(null=True, blank=True, choices=rate_scale)
     Notes = models.TextField(null=True, blank=True)
     members = models.ManyToManyField('employees.Member', through='JobRole', through_fields=('joborder', 'member'))
@@ -23,8 +26,8 @@ class JobOrder(models.Model):
         return self.Title
 
 class PPM(models.Model):
-    DeviceAsset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
-    CurrentPPM = models.DateTimeField(auto_now_add=True, blank=True)
+    deviceAsset = models.ForeignKey('inventory.DeviceAsset', on_delete=models.SET_NULL, null=True)
+    CurrentPPM = models.DateTimeField(blank=True, null=True)
     FuturePPM = models.DateTimeField(null=True, blank=True)  # from the Device Table
     members = models.ManyToManyField('employees.Member', through='PPMRole', through_fields=('ppm', 'member'))
 
@@ -40,10 +43,10 @@ class roleName(models.Model):
     roles = [
         ('Leader', 'Leader'), ('Member','Member')
     ]
-    name = models.CharField(max_length=50, choices=roles)
+    Name = models.CharField(max_length=50, choices=roles)
 
     def __str__(self):
-        return self.name
+        return self.Name
 
 class JobRole(models.Model):
     joborder = models.ForeignKey(JobOrder, on_delete=models.CASCADE)
