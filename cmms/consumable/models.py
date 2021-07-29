@@ -42,7 +42,6 @@ class Consumable (models.Model):
 
 
     def __str__(self):
-        #this is my comment
         return "Cost Type " + str(self.CostType) + " price is :" + str(self.Price)
 
 
