@@ -5,6 +5,9 @@ from datetime import datetime
 
 
 
+def myFunc(x):
+    print(x)
+
 class CostClass (models.Model):
     x = [
         ('محروقات','محروقات'),('ايجار','ايجار'),('مواصلات','مواصلات'),('مستهلكات','مستهلكات'),
@@ -43,8 +46,8 @@ class Consumable (models.Model):
 
 
     def __str__(self):
+        #this is my edit
         return "Cost Type " + str(self.CostType) + " price is:" + str(self.Price)
-
 
 
 
