@@ -3,7 +3,7 @@ from django.db import models
 
 # from cmms.supplier.models import *
 # from cmms.spareparts.models import *
-
+#
 # Create your models here.
 # هنا مهم نحط ال choices
 class DeviceStatus(models.Model):
@@ -122,4 +122,6 @@ class DeviceAsset(models.Model):
     DeviceStatus = models.ForeignKey(DeviceStatus, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
+        #space
+        #space++
         return str(self.Asset_No)
