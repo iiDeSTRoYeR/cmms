@@ -49,4 +49,3 @@ class Consumable (models.Model):
 
 
 
-
