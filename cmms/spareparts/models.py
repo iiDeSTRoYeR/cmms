@@ -28,7 +28,7 @@ class GeneralSP(models.Model):
     def __str__(self):
         return self.Name
 
-#
+
 class Sparepart(models.Model):
     Name = models.CharField(max_length=50, unique=True, validators=[MinLengthValidator(3,'Name Must be 3 characters.')])
     Details = models.TextField(max_length=500)
