@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
+<title>{% block title %} {{ settings.APP_NAME }} {% endblock %}</title>
+<link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css"/ >
+{% block head %} {% endblock %}
+
+</head>
+<body>
+
+{% block navbar %} {% endblock %}
+<div class="container">
+{% block welcome %} {% endblock %}
+{% block messages %}
+    {% if messages %}
+    {% for msg in messages %}
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+        {{msg.message}}
+        </div>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+</div>
+{% block footer %} {% endblock %}
+<script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js" </script>
+</body>
+</html>

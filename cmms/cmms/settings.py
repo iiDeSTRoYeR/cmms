@@ -44,8 +44,9 @@ INSTALLED_APPS = [
 
     'django_extensions',  # for running scripts (catload.py)
     'crispy_forms',  # for crispy forms
+    'taggit',
 
-    'django.contrib.humanize',  # human touch e.g. converts time to (32mins ago)
+    'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +55,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'  # Add
+# When we get to tagging
+TAGGIT_CASE_INSENSITIVE = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,9 +145,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'cmms/static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
