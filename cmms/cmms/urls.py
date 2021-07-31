@@ -13,6 +13,7 @@ SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
     path('tasks/', include('tasks.urls')),
     path('consumable/', include('consumable.urls')),

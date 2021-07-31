@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',  # for running scripts (catload.py)
     'crispy_forms',  # for crispy forms
 
-    'django.contrib.humanize',  # human touch e.g. converts time to (32mins ago)
+    'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'  # Add
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
