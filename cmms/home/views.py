@@ -14,3 +14,4 @@ class HomeView(View):
             'islocal': islocal,
         }
         return render(request, 'home/main.html', context)
+
