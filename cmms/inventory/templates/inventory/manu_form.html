@@ -1,0 +1,12 @@
+{% extends 'base_menu.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-primary mt-2">
+    <input type="submit" value="Cancel" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
+  </form>
+</p>
+{% endblock %}
