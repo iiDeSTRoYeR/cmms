@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from supplier.models import Manufacturer, AgentCompany
+from django.utils.html import mark_safe
 
 class ManuForm(forms.ModelForm):
 
@@ -28,20 +29,20 @@ class ModelManu(forms.Form):
     )
     voltage = forms.DecimalField(
         label='Voltage (V)',
-        max_digits=8, decimal_places=3,
+        max_digits=8, decimal_places=2,
         required=True, widget=forms.NumberInput(attrs={'placeholder': '220'})
     )
     amperage = forms.DecimalField(
         label='Amperage (A)',
-        max_digits=8, decimal_places=3,
+        max_digits=8, decimal_places=2,
         required=True, widget=forms.NumberInput(attrs={'placeholder': '5'})
     )
     phase = forms.ModelChoiceField(
-        label='Phase',
+        label=mark_safe('<span style=" font-style: italic;">Phase</span>'),
         queryset=Phase.objects.all(),
         required=True,
-        empty_label='(Single Phase, Three Phase, etc...)',
-        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'})
+        empty_label=mark_safe('<span style="font-style: italic; color:#6c757d;"> (Single Phase, Three Phase, etc...) </span>'),
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;', 'list': 'datalistOptions'})
     )
     frequency = forms.ModelChoiceField(
         label='Frequency (Hz)',

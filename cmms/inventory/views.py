@@ -41,7 +41,7 @@ class ManuDetailView(DetailView):
         x = Manufacturer.objects.get(id=pk)
         models = Model.objects.filter(manufacturer=x).order_by('Name')
         model_manu = ModelManu()
-        context = { 'manufacturer' : x, 'models': models, 'model_manu': model_manu }
+        context = { 'manufacturer' : x, 'models': models, 'model_manu': model_manu}
         return render(request, self.template_name, context)
 
 class ModelCreateView(LoginRequiredMixin, View):

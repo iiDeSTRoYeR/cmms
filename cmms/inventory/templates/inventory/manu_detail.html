@@ -9,18 +9,18 @@
     <a href="{%url 'inventory:model_detail' model.id %}"> {{ model.Name }} </a>
 </p>
 {% endfor %}
-{% if user.is_authenticated %}
 <br clear="all"/>
+<h2 class="fst-italic">Add a Model</h2>
+{% if user.is_authenticated %}
 <p>
 {% load crispy_forms_tags %}
 <form method="post" action="{% url 'inventory:manu_model_create' manufacturer.id %}">
     {% csrf_token %}
-    {{ model_manu|crispy }}
+    {{ model_manu | crispy }}
 <input type="submit" value="Submit" class="btn btn-primary mt-2">
 <input type="submit" value="All Manufactures" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
 </form>
 </p>
 {% endif %}
-
 
 {% endblock %}
