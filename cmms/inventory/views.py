@@ -30,7 +30,42 @@ class ManuCreateView(LoginRequiredMixin, View):
 
 class ManuListView(ListView):
     model = Manufacturer
+    template_name = 'inventory/manu_list.html'
 
+
+class ManuDetailView(DetailView):
+    model = Manufacturer
+    template_name = 'inventory/manu_detail.html'
+
+    def get(self, request, pk):
+        x = Manufacturer.objects.get(id=pk)
+        models = Model.objects.filter(manufacturer=x).order_by('Name')
+        model_manu = ModelManu()
+        context = { 'manufacturer' : x, 'models': models, 'model_manu': model_manu }
+        return render(request, self.template_name, context)
+
+class ModelCreateView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        m = get_object_or_404(Manufacturer, id=pk)
+
+        model = Model(
+            Name=request.POST['model'], Voltage=request.POST['voltage'],
+            Amperage=request.POST['amperage'], phase_id=request.POST['phase'],
+            frequency_id=request.POST['frequency'], device_id=request.POST['device'],
+            manufacturer=m)
+
+        model.save()
+
+        return redirect(reverse('inventory:manu_detail', args=[pk]))
+
+class ModelDeleteView(LoginRequiredMixin, DeleteView):
+    model = Model
+    template_name = 'inventory/model_delete.html'
+    success_url = reverse_lazy('inventory:manufacturer')
+
+    def get_success_url(self):
+        manufacturer = self.object.manufacturer
+        return reverse('inventory:manu_detail', args=[manufacturer.id])
 
 
 

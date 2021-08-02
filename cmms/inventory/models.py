@@ -70,7 +70,7 @@ class Device(models.Model):
                             )
     PPM_Cycle = models.IntegerField(null=True, blank=True, default=180)
     Brief_Function_Description = models.TextField(max_length=300)
-    accessories = models.ManyToManyField(Accessory)
+    accessories = models.ManyToManyField(Accessory, blank=True)
     deviceclass = models.ForeignKey(DeviceClass, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -84,7 +84,7 @@ class Frequency(models.Model):
     Value = models.CharField(max_length=5, unique=True, choices=x)
 
     def __str__(self):
-        return 'Frequency of value: '+str(self.Value)
+        return str(self.Value)
 
 
 class Phase(models.Model):
@@ -95,7 +95,7 @@ class Phase(models.Model):
     Value = models.CharField(max_length=20, unique=True, choices=x)
 
     def __str__(self):
-        return 'Phase of value: ' + str(self.Value)
+        return str(self.Value)
 
 class Model(models.Model):
     Name = models.CharField(
@@ -108,6 +108,8 @@ class Model(models.Model):
     manufacturer = models.ForeignKey('supplier.Manufacturer', null=True, on_delete=models.CASCADE)
     device = models.ForeignKey(Device, null=True, on_delete=models.SET_NULL)
 
+    class Meta:
+        ordering =['Name']
     def __str__(self):
         return self.Name
 

@@ -1,6 +1,16 @@
 {% extends 'base_menu.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+input::placeholder {
+    font-style: italic;
+
+}
+.underline {
+  text-decoration: italic;
+  font-weight: lighter;
+}
+</style>
 <p>
   <form action="" method="post">
     {% csrf_token %}
@@ -9,4 +19,14 @@
     <input type="submit" value="Cancel" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
   </form>
 </p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+//dummy pull of an element containing text to match against
+var $div = $('div');
+//dummy variable containing what to search for to replace
+var underlineMe = '(Select an agent company if available)';
+//replace all occurances of our search string with a wrapped version
+var modifiedValue = $div.html().replace(new RegExp(underlineMe, 'g'), '<span class="underline">'+ underlineMe +'</span>');
+//update the value in the DOM
+$div.html(modifiedValue);
+</script>
 {% endblock %}
