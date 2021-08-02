@@ -5,9 +5,8 @@
 {{ manufacturer.agentcompanies.Name }}
 </p>
 {% for model in models %}
-<p> {{ model.Name }}
-    <a href="{% url 'inventory:manu_model_delete' model.id %}"> Delete <i class="fa fa-trash"></i></a>
-
+<p>
+    <a href="{%url 'inventory:model_detail' model.id %}"> {{ model.Name }} </a>
 </p>
 {% endfor %}
 {% if user.is_authenticated %}
@@ -17,8 +16,8 @@
 <form method="post" action="{% url 'inventory:manu_model_create' manufacturer.id %}">
     {% csrf_token %}
     {{ model_manu|crispy }}
-<input type="submit" value="Submit">
-<input type="submit" value="All Manufactures" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
+<input type="submit" value="Submit" class="btn btn-primary mt-2">
+<input type="submit" value="All Manufactures" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
 </form>
 </p>
 {% endif %}

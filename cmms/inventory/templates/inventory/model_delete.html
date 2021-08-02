@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base_menu.html" %}
+{% block content %}
+<h1>Delete Model</h1>
 
-</body>
-</html>
+<p>Are you sure you want to delete the Model: {{ model }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete." class="btn btn-primary mt-2">
+  <a href="{% url 'inventory:manu_detail' model.manufacturer.id %}" class="btn btn-outline-primary mt-2">Cancel</a>
+
+</form>
+{% endblock %}

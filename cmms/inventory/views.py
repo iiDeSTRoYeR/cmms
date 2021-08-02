@@ -68,4 +68,6 @@ class ModelDeleteView(LoginRequiredMixin, DeleteView):
         return reverse('inventory:manu_detail', args=[manufacturer.id])
 
 
-
+class ModelDetailView(DetailView):
+    model = Model
+    template_name = 'inventory/model_detail.html'
