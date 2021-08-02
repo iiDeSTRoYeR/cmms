@@ -1,85 +1,78 @@
-{% load static%}
+{% extends "base_bootstrap.html" %}
 {% load app_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'custom.css' %}?=42">
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% block navbar %}
 <nav class="navbar navbar-expand-xxl bg-dark navbar-dark">
     <div class="container">
         <a href="#" class="navbar-brand"> CMMS </a>
-        <button class="navbar-toggler pull-left" type="button"
+        <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navmenu">
-            <span class="navbar-toggler-icon "></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-            class="collapse navbar-collapse" id="navmenu">
-                <ul class="navbar-nav mx-auto ">
-                    <div class="btn-block d-flex flex-wrap justify-content-center pt-1 ">
-                        <li class="nav-item ">
-                            <a href="#inventory" class="btn btn-light main-button text-dark fs-5">
-                                Inventory
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="#tasks" class="btn btn-light main-button text-dark fs-5">
-                                Tasks
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#spareparts" class="btn btn-light main-button text-dark fs-5">
-                                Spare Parts
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#employees" class="btn btn-light main-button text-dark fs-5">
-                                Employees
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#supplier" class="btn btn-light main-button text-dark fs-5">
-                                Suppliers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#consumable" class="btn btn-light main-button text-dark fs-5">
-                                Consumables
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#usage" class="btn btn-light main-button text-dark fs-5">
-                                Device Usage
-                            </a>
-                        </li>
-                    </div>
-                </ul>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav mx-auto">
+                <!-- btn-block-->
+                <div class="d-flex flex-wrap justify-content-center pt-1">
+                    <li class="nav-item">
+                        <a href="#inventory" class="btn btn-light main-button text-dark fs-5">
+                            Inventory
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="#tasks" class="btn btn-light main-button text-dark fs-5">
+                            Tasks
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#spareparts" class="btn btn-light main-button text-dark fs-5">
+                            Spare Parts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#employees" class="btn btn-light main-button text-dark fs-5">
+                            Employees
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#supplier" class="btn btn-light main-button text-dark fs-5">
+                            Suppliers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#consumable" class="btn btn-light main-button text-dark fs-5">
+                            Consumables
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#usage" class="btn btn-light main-button text-dark fs-5">
+                            Device Usage
+                        </a>
+                    </li>
+                </div>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img style="width: 3em;" src="{{ user|gravatar:100 }}"/><b class="caret" ></b>
-                 </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a href="{% url 'logout' %}?next={% url 'home:home' %}" class="dropdown-item text-center">Logout</a></li>
-                    </ul>
-             </li>
-            {% else %}
-            <li>
-                <a href="{% url 'login' %}?next={% url 'home:home' %}" class="btn btn-light text-dark fs-5">Login</a>
-            </li>
-            {% endif %}
+
         </ul>
+        <ul class="nav navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown ">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img style="width: 3em;" src="{{ user|gravatar:100 }}"/><b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a href="{% url 'logout' %}?next={% url 'home:home' %}"
+                           class="dropdown-item text-center">Logout</a>
+                    </li>
+                </ul>
+            </li>
+            {% else %}
+            <li class="nav-item navbar-right">
+                <a href="{% url 'login' %}?next={% url 'home:home' %}"
+                   class="btn btn-light text-dark fs-5">Login</a>
+            </li>
+        </ul>
+        {% endif %}
     </div>
-
 </nav>
-<script src="{%static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js' %}"> </script>
-<script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"> </script>
+{% endblock %}
 
-</body>
-</html>
