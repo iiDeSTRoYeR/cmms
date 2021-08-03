@@ -9,8 +9,7 @@ class Add_Device_Warranty(forms.ModelForm):
         queryset=DeviceAsset.objects.all(),
         required=True,
         empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;">(Device Asset Number)</span>'),
-        widget=forms.Select(
-            attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
 
     )
 
@@ -35,16 +34,14 @@ class Companies(forms.ModelForm):
             queryset=supplier.objects.all(),
             required=True,
             empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
-            widget = forms.Select(
-            attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
+            widget = forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
 
     Manufacturer = forms.ModelchoiceField(
             lable=mark_safe('<span style="font-style: italic;">Manufacturer</span>'),
             queryset=Manufacturer.objects.all(),
             required=True,
             empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
-            widget = forms.Select(
-            attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
+            widget = forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
 
     agentCompany = forms.ModelchoiceField(
             lable=mark_safe('<span style="font-style: italic;">agentCompany</span>'),
@@ -53,5 +50,3 @@ class Companies(forms.ModelForm):
             empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
             widget = forms.Select(
             attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
-
-        )
