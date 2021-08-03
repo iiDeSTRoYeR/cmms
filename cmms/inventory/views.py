@@ -12,6 +12,16 @@ from .models import *
 from .forms import *
 from supplier.models import Manufacturer
 
+class UserAccessMixin(PermissionRequiredMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if (not self.request.user.is_authenticated):
+            return redirect_to_login(self.request.get_full_path(),
+                                     self.get_login_url(), self.get_redirect_field_name())
+        if not self.has_permission():
+            return redirect(reverse_lazy('home:forbidden')) #نحط الرابط اللي نبغاه يرجع له اذا مو مسجل أو ما عنده الصلاحية
+        return super(UserAccessMixin, self).dispatch(request, *args, **kwargs)
+
+
 class ManuCreateView(LoginRequiredMixin, View):
     template_name = 'inventory/manu_form.html'
     success_url = reverse_lazy('inventory:manu_list')
