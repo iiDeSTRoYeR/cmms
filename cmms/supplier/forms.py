@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from inventory.models import DeviceAsset
+from django.utils.html import mark_safe
 
 
 class Add_Device_Warranty(forms.ModelForm):
