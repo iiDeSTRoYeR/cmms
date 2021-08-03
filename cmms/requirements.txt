@@ -16,3 +16,4 @@ django-extensions>=2.2.5
 django-taggit>=1.3.0
 mysqlclient>=1.4.6
 psycopg2
+django-rosetta

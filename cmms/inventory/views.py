@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import DeleteView, CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
+from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.views import redirect_to_login
 
 from .models import *
 from .forms import *
@@ -58,7 +61,8 @@ class ModelCreateView(LoginRequiredMixin, View):
 
         return redirect(reverse('inventory:manu_detail', args=[pk]))
 
-class ModelDeleteView(LoginRequiredMixin, DeleteView):
+class ModelDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
+    permission_required = 'model.delete_model'
     model = Model
     template_name = 'inventory/model_delete.html'
     success_url = reverse_lazy('inventory:manufacturer')

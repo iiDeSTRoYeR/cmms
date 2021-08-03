@@ -15,3 +15,6 @@ class HomeView(View):
         }
         return render(request, 'home/main.html', context)
 
+class ForbiddenView(View):
+    def get(self, request):
+        return render(request, 'home/forbidden.html')

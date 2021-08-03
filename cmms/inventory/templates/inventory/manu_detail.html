@@ -10,8 +10,8 @@
 </p>
 {% endfor %}
 <br clear="all"/>
-<h2 class="fst-italic">Add a Model</h2>
 {% if user.is_authenticated %}
+<h2 class="fst-italic">Add a Model</h2>
 <p>
 {% load crispy_forms_tags %}
 <form method="post" action="{% url 'inventory:manu_model_create' manufacturer.id %}">
