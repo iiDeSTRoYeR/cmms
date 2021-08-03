@@ -33,20 +33,20 @@ class Companies(forms.ModelForm):
             lable=mark_safe('<span style="font-style: italic;">Supplier</span>'),
             queryset=supplier.objects.all(),
             required=True,
-            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
+            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"'),
             widget = forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
 
     Manufacturer = forms.ModelchoiceField(
             lable=mark_safe('<span style="font-style: italic;">Manufacturer</span>'),
             queryset=Manufacturer.objects.all(),
             required=True,
-            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
+            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;'),
             widget = forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
 
     agentCompany = forms.ModelchoiceField(
             lable=mark_safe('<span style="font-style: italic;">agentCompany</span>'),
             queryset=agentCompany.objects.all(),
             required=True,
-            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"),
+            empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;"'),
             widget = forms.Select(
             attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'})
