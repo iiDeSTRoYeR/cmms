@@ -8,25 +8,95 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 09:12+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2021-08-03 22:30+0300\n"
+"PO-Revision-Date: 2021-08-03 22:31+0000\n"
+"Last-Translator: b'  <arabgamingnetwork@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Translated-Using: django-rosetta 0.9.6\n"
 
-#: .\cmms\settings.py:164
+#: .\cmms\settings.py:166
 msgid "English"
 msgstr ""
 
-#: .\cmms\settings.py:165
+#: .\cmms\settings.py:167
 msgid "Arabic"
 msgstr ""
 
 #: .\home\templates\home\main.html:4
 msgid "Hello World"
 msgstr "أهلاً عالم"
+
+#: .\inventory\forms.py:10
+msgid "Manufacturer Name"
+msgstr "اسم المصنع"
+
+#: .\inventory\forms.py:11
+msgid "Samsung, Toshiba, etc..."
+msgstr "سامسونق، تشوبيا، غيره..."
+
+#: .\inventory\forms.py:16
+msgid "Agent Companies"
+msgstr "الشركات الوكيلة"
+
+#: .\inventory\forms.py:17
+msgid "(Select an agent company if available)"
+msgstr "(اختر الشركة الوكيلة إن وجد)"
+
+#: .\inventory\forms.py:27
+msgid "Model Name"
+msgstr "اسم الموديل"
+
+#: .\inventory\forms.py:32
+msgid "Voltage (V)"
+msgstr "الجهد الكهربائي (V)"
+
+#: .\inventory\forms.py:37
+msgid "Amperage (A)"
+msgstr "شدة التيار (A)"
+
+#: .\inventory\forms.py:42
+msgid "Phase"
+msgstr "الطور الكهربائي"
+
+#: .\inventory\forms.py:45
+msgid "(Single Phase, Three Phase, etc...)"
+msgstr "(أحادي الطور، ثلاثي الطور، أخرى...)"
+
+#: .\inventory\forms.py:49
+msgid "Frequency (Hz)"
+msgstr "التردد (Hz)"
+
+#: .\inventory\forms.py:52
+msgid "(50, 60, 50/60, etc...)"
+msgstr ""
+
+#: .\inventory\forms.py:56
+msgid "General Device Name"
+msgstr "اسم الجهاز العام"
+
+#: .\inventory\forms.py:59
+msgid "(Refrigerator, Computer, CBC, X-Ray, etc...)"
+msgstr "(ثلاجة، كمبيوتر، جهاز تعداد خلايا الدم...)"
+
+#: .\inventory\templates\inventory\manu_detail.html:14
+msgid "Add a Model"
+msgstr "أضف موديل"
+
+#: .\inventory\templates\inventory\manu_detail.html:20
+#: .\inventory\templates\inventory\manu_form.html:19
+msgid "Submit"
+msgstr "حفظ"
+
+#: .\inventory\templates\inventory\manu_detail.html:21
+#| msgid "Manufacturer Name"
+msgid "All Manufactures"
+msgstr "جميع المصنعين"
+
+#: .\inventory\templates\inventory\manu_form.html:20
+msgid "Cancel"
+msgstr "إلغاء"
