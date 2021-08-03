@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',  # for crispy forms
     'taggit',
     'rosetta',
+    'modeltranslation',
 
     'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
 
@@ -90,6 +91,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'cmms.wsgi.application'
 

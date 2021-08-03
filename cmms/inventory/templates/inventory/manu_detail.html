@@ -1,5 +1,12 @@
 {% extends "base_menu.html" %}
+{% load i18n%}
 {% block content %}
+<style>
+    input::placeholder {
+    font-style: italic;
+    color: rgba(255, 0, 0, 0.23) !important;
+}
+</style>
 <h1>{{ manufacturer.Name }}</h1>
 <p>
 {{ manufacturer.agentcompanies.Name }}
@@ -11,14 +18,14 @@
 {% endfor %}
 <br clear="all"/>
 {% if user.is_authenticated %}
-<h2 class="fst-italic">Add a Model</h2>
+<h2 class="fst-italic">{%trans 'Add a Model' %}</h2>
 <p>
 {% load crispy_forms_tags %}
 <form method="post" action="{% url 'inventory:manu_model_create' manufacturer.id %}">
     {% csrf_token %}
     {{ model_manu | crispy }}
-<input type="submit" value="Submit" class="btn btn-primary mt-2">
-<input type="submit" value="All Manufactures" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
+<input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+<input type="submit" value="{%trans 'All Manufactures'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
 </form>
 </p>
 {% endif %}

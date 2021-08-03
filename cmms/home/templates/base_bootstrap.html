@@ -1,7 +1,9 @@
 {% load static%}
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html>
-<html lang="en">
+<html dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+
 <head>
     <!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
     <meta charset="UTF-8">

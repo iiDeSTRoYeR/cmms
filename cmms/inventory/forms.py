@@ -2,18 +2,19 @@ from django import forms
 from .models import *
 from supplier.models import Manufacturer, AgentCompany
 from django.utils.html import mark_safe
+from modeltranslation.forms import TranslationModelForm
+from django.utils.translation import gettext_lazy as _
 
-class ManuForm(forms.ModelForm):
-
+class ManuForm(TranslationModelForm):
     Name = forms.CharField(
-        required=True, label='Manufacturer Name',
-        widget=forms.TextInput(attrs={'placeholder': 'Samsung, Toshiba, etc...'})
+        required=True, label=_('Manufacturer Name'),
+        widget=forms.TextInput(attrs={'placeholder': _('Samsung, Toshiba, etc...')})
     )
 
     agentcompanies = forms.ModelChoiceField(queryset=AgentCompany.objects.all(),
         required=False,
-        label='Agent Companies',
-        empty_label='(Select an agent company if available)',
+        label=_('Agent Companies'),
+        empty_label=_('(Select an agent company if available)'),
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'})
     )
 
@@ -23,40 +24,40 @@ class ManuForm(forms.ModelForm):
 
 class ModelManu(forms.Form):
     model = forms.CharField(
-        label='Model Name',
+        label=_('Model Name'),
         required=True, max_length=50, min_length=3, strip=True,
         widget=forms.TextInput(attrs={'placeholder': 'MD-500, SA-775544, etc...'})
     )
     voltage = forms.DecimalField(
-        label='Voltage (V)',
+        label=_('Voltage (V)'),
         max_digits=8, decimal_places=2,
         required=True, widget=forms.NumberInput(attrs={'placeholder': '220'})
     )
     amperage = forms.DecimalField(
-        label='Amperage (A)',
+        label=_('Amperage (A)'),
         max_digits=8, decimal_places=2,
         required=True, widget=forms.NumberInput(attrs={'placeholder': '5'})
     )
     phase = forms.ModelChoiceField(
-        label=mark_safe('<span style=" font-style: italic;">Phase</span>'),
+        label=_('Phase'),
         queryset=Phase.objects.all(),
         required=True,
-        empty_label=mark_safe('<span style="font-style: italic; color:#6c757d;"> (Single Phase, Three Phase, etc...) </span>'),
-        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;', 'list': 'datalistOptions'})
+        empty_label= _('(Single Phase, Three Phase, etc...)'),
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic;'})
     )
     frequency = forms.ModelChoiceField(
-        label='Frequency (Hz)',
+        label=_('Frequency (Hz)'),
         queryset=Frequency.objects.all(),
         required=True,
-        empty_label='(50, 60, 50/60, etc...)',
-        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'})
+        empty_label=_('(50, 60, 50/60, etc...)'),
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic;'})
     )
     device = forms.ModelChoiceField(
-        label='General Device Name',
+        label=_('General Device Name'),
         queryset=Device.objects.all(),
         required=True,
-        empty_label='(Refrigerator, Computer, CBC, X-Ray, etc...)',
-        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'})
+        empty_label=_('(Refrigerator, Computer, CBC, X-Ray, etc...)'),
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic;'})
     )
 
 

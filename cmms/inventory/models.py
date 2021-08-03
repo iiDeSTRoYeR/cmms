@@ -88,11 +88,7 @@ class Frequency(models.Model):
 
 
 class Phase(models.Model):
-    x = [
-        ('Single Phase', 'Single Phase'), ('Three phase', 'Three phase'),
-        ('DC', 'DC')
-    ]
-    Value = models.CharField(max_length=20, unique=True, choices=x)
+    Value = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
         return str(self.Value)
