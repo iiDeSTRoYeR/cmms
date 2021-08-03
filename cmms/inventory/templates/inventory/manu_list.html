@@ -1,0 +1,17 @@
+{% extends "base_menu.html" %}
+{% block content %}
+<h1>Manufacturers</h1>
+<p>
+{% if manufacturer_list %}
+<ul>
+  {% for manufacturer in manufacturer_list %}
+    <li>
+        <a href="{% url 'inventory:manu_detail'  manufacturer.id %}">{{ manufacturer.Name }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>There are no Manufacturers in the database.</p>
+{% endif %}
+</p>
+{% endblock %}

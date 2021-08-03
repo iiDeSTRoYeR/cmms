@@ -33,9 +33,7 @@ class Member(models.Model):
     Username = models.ForeignKey(User, on_delete=models.CASCADE)
     National_ID = models.BigIntegerField(
         unique=True, null=True, blank=True,
-        validators=[MinValueValidator(1000000000,'Please Enter 10 Numbers.'), MaxValueValidator(9999999999, 'Please Enter Less than 10 Numbers.')]
-
-    )
+        validators=[MinValueValidator(1000000000,'Please Enter 10 Numbers.'), MaxValueValidator(9999999999, 'Please Enter Less than 10 Numbers.')])
     Name = models.CharField(max_length=50, validators=[MinLengthValidator(4,'Name Must be 4 characters.')], null=True, blank=True)
     DoB = models.DateField(null=True, blank=True)
     nationality = models.ForeignKey(Nationality, on_delete=models.SET_NULL, null=True, blank=True)
@@ -49,8 +47,7 @@ class Member(models.Model):
     MobileNo = models.IntegerField(
         unique=True,
         validators=[MinValueValidator(500000000, 'Please Enter 10 Numbers.'),
-                    MaxValueValidator(599999999, 'Please Enter Less than 10 Numbers.')]
-    )
+                    MaxValueValidator(599999999, 'Please Enter Less than 10 Numbers.')])
     Salary = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
     Lapses = models.IntegerField(null=True, blank=True)
     Warnings = models.IntegerField(null=True, blank=True)
