@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from supplier.models import Supplier, Manufacturer, AgentCompany, Warranty
+from inventory.models import DeviceAsset
 
 
 class Add_Device_Warranty(forms.ModelForm):
