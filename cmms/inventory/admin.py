@@ -4,12 +4,6 @@ from modeltranslation.admin import TranslationAdmin
 from supplier.models import Manufacturer
 from .models import *
 
-
-
-class ManufacturerAdmin(TranslationAdmin, admin.ModelAdmin):
-    model = Manufacturer
-    exclude = ('agentcompanies',)
-
 class PhaseAdmin(TranslationAdmin):
     model = Phase
 
@@ -34,7 +28,7 @@ admin.site.register(DeviceAsset)
 admin.site.register(BldgNo)
 admin.site.register(Phase, PhaseAdmin)
 admin.site.register(Frequency)
-admin.site.register(Manufacturer, ManufacturerAdmin)
+admin.site.register(Manufacturer)
 
 
 

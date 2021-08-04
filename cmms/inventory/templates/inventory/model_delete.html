@@ -1,13 +1,14 @@
 {% extends "base_menu.html" %}
+{% load i18n %}
 {% block content %}
-<h1>Delete Model</h1>
+<h1>{% trans "Delete Model" %}</h1>
 
-<p>Are you sure you want to delete the Model: {{ model }}?</p>
+<p>{% trans "Are you sure you want to delete the Model: " %} {{ model }}?</p>
 
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="submit" value="Yes, delete." class="btn btn-primary mt-2">
-  <a href="{% url 'inventory:manu_detail' model.manufacturer.id %}" class="btn btn-outline-primary mt-2">Cancel</a>
+  <input type="submit" value="{% trans 'Yes, delete.' %}" class="btn btn-primary mt-2">
+  <a href="{% url 'inventory:manu_detail' model.manufacturer.id %}" class="btn btn-outline-primary mt-2">{% trans "Cancel" %}</a>
 
 </form>
 {% endblock %}

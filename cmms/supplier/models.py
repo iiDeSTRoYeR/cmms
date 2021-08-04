@@ -14,7 +14,7 @@ class Manufacturer(models.Model):
 
 class AgentCompany(models.Model):
     Name = models.CharField(max_length=50, unique=True)
-    manufacturers = models.ManyToManyField(Manufacturer)
+    #manufacturers = models.ManyToManyField(Manufacturer)
     def __str__(self):
         return self.Name
 
