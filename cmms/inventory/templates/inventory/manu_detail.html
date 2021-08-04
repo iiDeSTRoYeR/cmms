@@ -8,9 +8,17 @@
 }
 </style>
 <h1>{{ manufacturer.Name }}</h1>
+<a href="{% url 'inventory:manu_delete' manufacturer.id %}"><i class="fa fa-trash position-relative position-absolute start-50 p-5"></i></a>
+
+<h3> {% trans 'Agent Companies' %}</h3>
 <p>
-{{ manufacturer.agentcompanies.Name }}
+    {% for agent in manufacturer.agentcompanies.all %}
+        {{ agent }}
+    {%endfor%}
 </p>
+
+<h3> {% trans 'Models:' %}</h3>
+
 {% for model in models %}
 <p>
     <a href="{%url 'inventory:model_detail' model.id %}"> {{ model.Name }} </a>

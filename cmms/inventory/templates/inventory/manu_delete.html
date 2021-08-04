@@ -1,0 +1,14 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+
+<h1>{% trans "Delete Manufacturer" %}</h1>
+
+<p>{% trans "Are you sure you want to delete the Manufacturer: " %} {{ manufacturer }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="{% trans 'Yes, delete.' %}" class="btn btn-primary mt-2">
+  <a href="{% url 'inventory:manu_list' %}" class="btn btn-outline-primary mt-2">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

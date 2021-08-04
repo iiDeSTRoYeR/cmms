@@ -97,8 +97,8 @@ class Model(models.Model):
     Name = models.CharField(
         max_length=50, validators=[MinLengthValidator(3, "Minimum Length of a Model's name is 3 letters")]
                             )
-    Voltage = models.DecimalField(max_digits=8, decimal_places=3)
-    Amperage = models.DecimalField(max_digits=6, decimal_places=3)
+    Voltage = models.DecimalField(max_digits=8, decimal_places=2)
+    Amperage = models.DecimalField(max_digits=6, decimal_places=2)
     phase = models.ForeignKey('Phase', on_delete=models.SET_NULL, null=True)
     frequency = models.ForeignKey('Frequency', on_delete=models.SET_NULL, null=True)
     manufacturer = models.ForeignKey('supplier.Manufacturer', null=True, on_delete=models.CASCADE)

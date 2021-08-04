@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 22:30+0300\n"
-"PO-Revision-Date: 2021-08-03 22:31+0000\n"
+"POT-Creation-Date: 2021-08-04 12:46+0300\n"
+"PO-Revision-Date: 2021-08-04 12:46+0000\n"
 "Last-Translator: b'  <arabgamingnetwork@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Translated-Using: django-rosetta 0.9.6\n"
 
-#: .\cmms\settings.py:166
+#: .\cmms\settings.py:167
 msgid "English"
 msgstr ""
 
-#: .\cmms\settings.py:167
+#: .\cmms\settings.py:168
 msgid "Arabic"
 msgstr ""
 
@@ -37,66 +37,127 @@ msgstr "اسم المصنع"
 
 #: .\inventory\forms.py:11
 msgid "Samsung, Toshiba, etc..."
-msgstr "سامسونق، تشوبيا، غيره..."
+msgstr "سامسونق، توشيبا، غيره..."
 
-#: .\inventory\forms.py:16
+#: .\inventory\forms.py:16 .\inventory\templates\inventory\manu_detail.html:13
 msgid "Agent Companies"
 msgstr "الشركات الوكيلة"
 
-#: .\inventory\forms.py:17
-msgid "(Select an agent company if available)"
-msgstr "(اختر الشركة الوكيلة إن وجد)"
-
-#: .\inventory\forms.py:27
+#: .\inventory\forms.py:26
 msgid "Model Name"
 msgstr "اسم الموديل"
 
-#: .\inventory\forms.py:32
+#: .\inventory\forms.py:31
 msgid "Voltage (V)"
 msgstr "الجهد الكهربائي (V)"
 
-#: .\inventory\forms.py:37
+#: .\inventory\forms.py:36
 msgid "Amperage (A)"
 msgstr "شدة التيار (A)"
 
-#: .\inventory\forms.py:42
+#: .\inventory\forms.py:41
 msgid "Phase"
 msgstr "الطور الكهربائي"
 
-#: .\inventory\forms.py:45
+#: .\inventory\forms.py:44
 msgid "(Single Phase, Three Phase, etc...)"
 msgstr "(أحادي الطور، ثلاثي الطور، أخرى...)"
 
-#: .\inventory\forms.py:49
+#: .\inventory\forms.py:48
 msgid "Frequency (Hz)"
 msgstr "التردد (Hz)"
 
-#: .\inventory\forms.py:52
+#: .\inventory\forms.py:51
 msgid "(50, 60, 50/60, etc...)"
 msgstr ""
 
-#: .\inventory\forms.py:56
+#: .\inventory\forms.py:55
 msgid "General Device Name"
 msgstr "اسم الجهاز العام"
 
-#: .\inventory\forms.py:59
+#: .\inventory\forms.py:58
 msgid "(Refrigerator, Computer, CBC, X-Ray, etc...)"
 msgstr "(ثلاجة، كمبيوتر، جهاز تعداد خلايا الدم...)"
 
-#: .\inventory\templates\inventory\manu_detail.html:14
+#: .\inventory\templates\inventory\manu_delete.html:5
+msgid "Delete Manufacturer"
+msgstr "حذف المصنع"
+
+#: .\inventory\templates\inventory\manu_delete.html:7
+msgid "Are you sure you want to delete the Manufacturer: "
+msgstr "هل أنت متأكد من حذف المصنع:"
+
+#: .\inventory\templates\inventory\manu_delete.html:11
+#: .\inventory\templates\inventory\model_delete.html:10
+msgid "Yes, delete."
+msgstr "نعم، حذف."
+
+#: .\inventory\templates\inventory\manu_delete.html:12
+#: .\inventory\templates\inventory\manu_form.html:22
+#: .\inventory\templates\inventory\model_delete.html:11
+#: .\inventory\templates\inventory\model_form.html:11
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: .\inventory\templates\inventory\manu_detail.html:20
+msgid "Models:"
+msgstr "الموديلات"
+
+#: .\inventory\templates\inventory\manu_detail.html:29
 msgid "Add a Model"
 msgstr "أضف موديل"
 
-#: .\inventory\templates\inventory\manu_detail.html:20
-#: .\inventory\templates\inventory\manu_form.html:19
+#: .\inventory\templates\inventory\manu_detail.html:35
+#: .\inventory\templates\inventory\manu_form.html:21
+#: .\inventory\templates\inventory\model_form.html:10
 msgid "Submit"
 msgstr "حفظ"
 
-#: .\inventory\templates\inventory\manu_detail.html:21
-#| msgid "Manufacturer Name"
+#: .\inventory\templates\inventory\manu_detail.html:36
 msgid "All Manufactures"
 msgstr "جميع المصنعين"
 
-#: .\inventory\templates\inventory\manu_form.html:20
-msgid "Cancel"
-msgstr "إلغاء"
+#: .\inventory\templates\inventory\manu_form.html:16
+#| msgid "Delete Manufacturer"
+msgid "Add/Edit a Manufacturer"
+msgstr "إضافة/تعديل المصنع"
+
+#: .\inventory\templates\inventory\manu_list.html:4
+msgid "Manufacturers"
+msgstr "المصنعين"
+
+#: .\inventory\templates\inventory\model_delete.html:4
+msgid "Delete Model"
+msgstr "حذف الموديل"
+
+#: .\inventory\templates\inventory\model_delete.html:6
+msgid "Are you sure you want to delete the Model: "
+msgstr "هل أنت متأكد من حذف الموديل:"
+
+#: .\inventory\templates\inventory\model_detail.html:9
+msgid "Device: "
+msgstr "الجهاز:"
+
+#: .\inventory\templates\inventory\model_detail.html:10
+msgid "Voltage: "
+msgstr "الجهد الكهربائي:"
+
+#: .\inventory\templates\inventory\model_detail.html:11
+msgid "Amperage: "
+msgstr "شدة التيار:"
+
+#: .\inventory\templates\inventory\model_detail.html:12
+msgid "Phase: "
+msgstr "الطور الكهربائي:"
+
+#: .\inventory\templates\inventory\model_detail.html:13
+msgid "Frequency: "
+msgstr "التردد:"
+
+#: .\inventory\templates\inventory\model_form.html:5
+#| msgid "Add a Model"
+msgid "Edit a Model"
+msgstr "تعديل موديل"
+
+#~ msgid "(Select an agent company if available)"
+#~ msgstr "(اختر الشركة الوكيلة إن وجد)"

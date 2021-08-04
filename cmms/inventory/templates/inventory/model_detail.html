@@ -1,14 +1,15 @@
 {% extends "base_menu.html" %}
+{% load i18n %}
 {% block content %}
-<span style="float: right;">
-    <a href="{% url 'inventory:manu_model_delete' model.id %}"><i class="fa fa-trash"></i></a>
-</span>
+
+<a href="{% url 'inventory:manu_model_delete' model.id %}"><i class="fa fa-trash position-relative position-absolute start-50 p-5"></i></a>
+
 <h1>{{ model.Name }}</h1>
 <ul>
-    <li>Voltage: {{ model.Voltage}} V</li>
-    <li>Amperage: {{ model.Amperage}} A </li>
-    <li>Phase: {{model.phase.Value}}</li>
-    <li>Frequency: {{model.frequency.Value}}</li>
-    <li>Device: {{model.device.Name}}</li>
+    <li>{% trans "Device: " %} {{model.device.Name}}</li>
+    <li>{% trans "Voltage: " %} {{ model.Voltage}} V</li>
+    <li>{% trans "Amperage: " %} {{ model.Amperage}} A </li>
+    <li>{% trans "Phase: " %} {{model.phase.Value}}</li>
+    <li>{% trans "Frequency: " %} {{model.frequency.Value}}</li>
 </ul>
 {% endblock %}
