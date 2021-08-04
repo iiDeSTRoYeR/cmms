@@ -5,11 +5,10 @@ from django.utils.html import mark_safe
 
 class AddNewWarrantyForm(forms.ModelForm):
 
-    DeviceAssets=forms.ModelchoiceField(
+    DeviceAssets=forms.ModelMultipleChoiceField(
         lable=mark_safe('<span style="font-style: italic;">DeviceAsset</span>'),
         queryset=DeviceAsset.objects.all(),
         required=True,
-        empty_label=mark_safe('<span style="font-style: italic;color:#6c757d;">(Device Asset Number)</span>'),
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list':'datalistOptions'}),)
 
     class Meta:
@@ -32,20 +31,19 @@ class AddNewWarrantyForm(forms.ModelForm):
     # required=True,))
 
 
-    supplier= forms.ModelchoiceField(
+    supplier= forms.ModelChoiceField(
         lable=mark_safe('<span style="font-style: italic;">Supplier</span>'),
         required=True,
-        label=_('Warranty Name'),
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'}),
     )
 
-    Manufacturer = forms.ModelchoiceField(
+    Manufacturer = forms.ModelChoiceField(
         lable=mark_safe('<span style="font-style: italic;">Manufacturer</span>'),
         queryset=Manufacturer.objects.all(),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'}),)
 
-    agentCompany = forms.ModelchoiceField(
+    agentCompany = forms.ModelChoiceField(
         lable=mark_safe('<span style="font-style: italic;">agentCompany</span>'),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;','list': 'datalistOptions'}),)

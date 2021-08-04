@@ -1,0 +1,18 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans "Warranty" %}</h1>
+<p>
+{% if Warranty_list %}
+<ul>
+  {% for Warranty in Warranty_list %}
+    <li>
+        <a href="{% url 'supplier:SupplierManu_detail'  Warranty.id %}">{{ Warranty.Name }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>There are no Warranties in the database.</p>
+{% endif %}
+</p>
+{% endblock %}
