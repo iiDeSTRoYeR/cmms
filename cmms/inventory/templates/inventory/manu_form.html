@@ -1,5 +1,6 @@
 {% extends 'base_menu.html' %}
 {% load crispy_forms_tags %}
+{% load i18n%}
 {% block content %}
 <style>
 input::placeholder {
@@ -11,12 +12,14 @@ input::placeholder {
   font-weight: lighter;
 }
 </style>
+
+<h1> {%trans "Add/Edit a Manufacturer" %}</h1>
 <p>
   <form action="" method="post">
     {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Submit" class="btn btn-primary mt-2">
-    <input type="submit" value="Cancel" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
+    {{ form | crispy}}
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
   </form>
 </p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">

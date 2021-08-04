@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-08-04 12:46+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\cmms\settings.py:167
+msgid "English"
+msgstr ""
+
+#: .\cmms\settings.py:168
+msgid "Arabic"
+msgstr ""
+
+#: .\home\templates\home\main.html:4
+msgid "Hello World"
+msgstr ""
+
+#: .\inventory\forms.py:10
+msgid "Manufacturer Name"
+msgstr ""
+
+#: .\inventory\forms.py:11
+msgid "Samsung, Toshiba, etc..."
+msgstr ""
+
+#: .\inventory\forms.py:16 .\inventory\templates\inventory\manu_detail.html:13
+msgid "Agent Companies"
+msgstr ""
+
+#: .\inventory\forms.py:26
+msgid "Model Name"
+msgstr ""
+
+#: .\inventory\forms.py:31
+msgid "Voltage (V)"
+msgstr ""
+
+#: .\inventory\forms.py:36
+msgid "Amperage (A)"
+msgstr ""
+
+#: .\inventory\forms.py:41
+msgid "Phase"
+msgstr ""
+
+#: .\inventory\forms.py:44
+msgid "(Single Phase, Three Phase, etc...)"
+msgstr ""
+
+#: .\inventory\forms.py:48
+msgid "Frequency (Hz)"
+msgstr ""
+
+#: .\inventory\forms.py:51
+msgid "(50, 60, 50/60, etc...)"
+msgstr ""
+
+#: .\inventory\forms.py:55
+msgid "General Device Name"
+msgstr ""
+
+#: .\inventory\forms.py:58
+msgid "(Refrigerator, Computer, CBC, X-Ray, etc...)"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_delete.html:5
+msgid "Delete Manufacturer"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_delete.html:7
+msgid "Are you sure you want to delete the Manufacturer: "
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_delete.html:11
+#: .\inventory\templates\inventory\model_delete.html:10
+msgid "Yes, delete."
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_delete.html:12
+#: .\inventory\templates\inventory\manu_form.html:22
+#: .\inventory\templates\inventory\model_delete.html:11
+#: .\inventory\templates\inventory\model_form.html:11
+msgid "Cancel"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_detail.html:20
+msgid "Models:"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_detail.html:29
+msgid "Add a Model"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_detail.html:35
+#: .\inventory\templates\inventory\manu_form.html:21
+#: .\inventory\templates\inventory\model_form.html:10
+msgid "Submit"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_detail.html:36
+msgid "All Manufactures"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_form.html:16
+msgid "Add/Edit a Manufacturer"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_list.html:4
+msgid "Manufacturers"
+msgstr ""
+
+#: .\inventory\templates\inventory\model_delete.html:4
+msgid "Delete Model"
+msgstr ""
+
+#: .\inventory\templates\inventory\model_delete.html:6
+msgid "Are you sure you want to delete the Model: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_detail.html:9
+msgid "Device: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_detail.html:10
+msgid "Voltage: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_detail.html:11
+msgid "Amperage: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_detail.html:12
+msgid "Phase: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_detail.html:13
+msgid "Frequency: "
+msgstr ""
+
+#: .\inventory\templates\inventory\model_form.html:5
+msgid "Edit a Model"
+msgstr ""

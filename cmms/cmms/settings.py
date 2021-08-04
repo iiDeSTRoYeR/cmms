@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django_extensions',  # for running scripts (catload.py)
     'crispy_forms',  # for crispy forms
     'taggit',
+    'rosetta',
+    'modeltranslation',
+    #'geeks',
 
     'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
 
@@ -63,6 +66,7 @@ TAGGIT_CASE_INSENSITIVE = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -88,6 +92,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'cmms.wsgi.application'
 
@@ -154,3 +159,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'cmms/static')]
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.utils.translation import gettext_lazy as _
+
+#LANGUAGE_CODE = 'en'          #default language
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('ar', _('Arabic')),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)

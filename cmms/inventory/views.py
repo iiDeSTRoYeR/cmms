@@ -1,21 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import DeleteView, CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy, reverse
+from django.utils.translation import gettext as _
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.views import redirect_to_login
 
 from .models import *
 from .forms import *
 from supplier.models import Manufacturer
+from home.owner import UserAccessMixin
 
-class ManuCreateView(LoginRequiredMixin, View):
+
+class ManuCreateView(LoginRequiredMixin, UserAccessMixin, View):
+    permission_required = 'manufacturer.add_manufacturer'
     template_name = 'inventory/manu_form.html'
     success_url = reverse_lazy('inventory:manu_list')
 
     def get(self, request):
         form = ManuForm()
-        ctx = {'form' : form}
+        ctx = {'form': form}
         return render(request, self.template_name, ctx)
 
     def post(self, request):
@@ -41,16 +47,18 @@ class ManuDetailView(DetailView):
         x = Manufacturer.objects.get(id=pk)
         models = Model.objects.filter(manufacturer=x).order_by('Name')
         model_manu = ModelManu()
-        context = { 'manufacturer' : x, 'models': models, 'model_manu': model_manu}
+        context = {'manufacturer': x, 'models': models, 'model_manu': model_manu}
         return render(request, self.template_name, context)
 
-class ModelCreateView(LoginRequiredMixin, View):
+
+class ModelCreateView(LoginRequiredMixin, UserAccessMixin, View):
+    permission_required = 'model.add_model'
     def post(self, request, pk):
         m = get_object_or_404(Manufacturer, id=pk)
 
         model = Model(
-            Name=request.POST['model'], Voltage=request.POST['voltage'],
-            Amperage=request.POST['amperage'], phase_id=request.POST['phase'],
+            Name=request.POST['Name'], Voltage=request.POST['Voltage'],
+            Amperage=request.POST['Amperage'], phase_id=request.POST['phase'],
             frequency_id=request.POST['frequency'], device_id=request.POST['device'],
             manufacturer=m)
 
@@ -58,16 +66,45 @@ class ModelCreateView(LoginRequiredMixin, View):
 
         return redirect(reverse('inventory:manu_detail', args=[pk]))
 
-class ModelDeleteView(LoginRequiredMixin, DeleteView):
+
+class ModelDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
+    permission_required = 'model.delete_model'
     model = Model
     template_name = 'inventory/model_delete.html'
-    success_url = reverse_lazy('inventory:manufacturer')
+    #success_url = reverse_lazy('inventory:manufacturer')
 
     def get_success_url(self):
         manufacturer = self.object.manufacturer
         return reverse('inventory:manu_detail', args=[manufacturer.id])
 
-
 class ModelDetailView(DetailView):
     model = Model
     template_name = 'inventory/model_detail.html'
+
+class ManuDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
+    model = Manufacturer
+    template_name = 'inventory/manu_delete.html'
+    success_url = reverse_lazy('inventory:manu_list')
+
+    permission_required = 'manufacturer.delete_manufacturer'
+
+class ManuUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
+    template_name = 'inventory/manu_form.html'
+    model = Manufacturer
+    form_class = ManuForm
+    permission_required = 'manufacturer.change_manufacturer'
+
+    def get_success_url(self):
+        manufacturer = self.object
+        return reverse('inventory:manu_detail', args=[manufacturer.id])
+
+class ModelUpdateView(LoginRequiredMixin,UserAccessMixin, UpdateView):
+    template_name = 'inventory/model_form.html'
+    model = Model
+    form_class = ModelManu
+    permission_required = 'model.change_model'
+
+    def get_success_url(self):
+        return reverse('inventory:model_detail', args=[self.object.id])
+
+
