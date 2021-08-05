@@ -2,11 +2,12 @@ from django import forms
 from .models import *
 from inventory.models import DeviceAsset
 from django.utils.html import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 class AddNewWarrantyForm(forms.ModelForm):
 
     DeviceAssets=forms.ModelMultipleChoiceField(
-        lable=mark_safe('<span style="font-style: italic;">DeviceAsset</span>'),
+        label=mark_safe('<span style="font-style: italic;">DeviceAsset</span>'),
         queryset=DeviceAsset.objects.all(),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list':'datalistOptions'}),)
@@ -22,8 +23,8 @@ class AddNewWarrantyForm(forms.ModelForm):
     )
     Date = forms.DateField(
         widget=forms.SelectDateWidget('%m/%d/%y'),
-        available=forms.BooleanField(label='Valid'),
     )
+    Available = forms.BooleanField(label='Valid')
 
     # class GeeksForm(forms.Form):
     # Name =forms.CharField(
@@ -32,18 +33,18 @@ class AddNewWarrantyForm(forms.ModelForm):
 
 
     supplier= forms.ModelChoiceField(
-        lable=mark_safe('<span style="font-style: italic;">Supplier</span>'),
+        label=mark_safe('<span style="font-style: italic;">Supplier</span>'),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'}),
     )
 
     Manufacturer = forms.ModelChoiceField(
-        lable=mark_safe('<span style="font-style: italic;">Manufacturer</span>'),
+        label=mark_safe('<span style="font-style: italic;">Manufacturer</span>'),
         queryset=Manufacturer.objects.all(),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;', 'list': 'datalistOptions'}),)
 
     agentCompany = forms.ModelChoiceField(
-        lable=mark_safe('<span style="font-style: italic;">agentCompany</span>'),
+        label=mark_safe('<span style="font-style: italic;">agentCompany</span>'),
         required=True,
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style: italic;color:#6c757d;','list': 'datalistOptions'}),)

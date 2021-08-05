@@ -11,6 +11,7 @@
     </li>
   {% endfor %}
 </ul>
+<a href="{% url 'inventory:manu_create' %} " class="btn btn-primary">{% trans 'Create A new Manufacturer' %}</a>
 {% else %}
   <p>There are no Manufacturers in the database.</p>
 {% endif %}
