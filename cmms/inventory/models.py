@@ -20,6 +20,7 @@ class AccModel(models.Model):
 
 class Accessory(models.Model):
     Name = models.CharField(max_length=50, unique=True)
+    Description = models.TextField(max_length=500, null=True)
     accmodel = models.ForeignKey(AccModel, on_delete=models.CASCADE)
     #devices = models.ManyToManyField('Device')
 
@@ -28,12 +29,11 @@ class Accessory(models.Model):
 
 
 class AccDetails(models.Model):
-    Description = models.TextField(max_length=500)
     SerialNo = models.CharField(max_length=50, unique=True)
-    accessory = models.OneToOneField(Accessory, on_delete=models.CASCADE)
+    accessory = models.ForeignKey(Accessory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.Description
+        return self.SerialNo
 
 class DeviceStatus(models.Model):
     x = [('Operational', 'Operational'), ('Malfunctioning', 'Malfunctioning')]

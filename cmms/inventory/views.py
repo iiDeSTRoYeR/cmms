@@ -13,7 +13,7 @@ from .forms import *
 from supplier.models import Manufacturer
 from home.owner import UserAccessMixin
 
-
+# >>>>>>>>>>>>>>>>>>>>>>>> M A N U F A C T U R E R ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 class ManuCreateView(LoginRequiredMixin, UserAccessMixin, View):
     permission_required = 'manufacturer.add_manufacturer'
     template_name = 'inventory/manu_form.html'
@@ -108,3 +108,7 @@ class ModelUpdateView(LoginRequiredMixin,UserAccessMixin, UpdateView):
         return reverse('inventory:model_detail', args=[self.object.id])
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>> M A N U F A C T U R E R ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
