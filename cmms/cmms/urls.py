@@ -13,7 +13,7 @@ SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+
     url(r'^site/(?P<path>.*)$', serve,
         {'document_root': SITE_ROOT, 'show_indexes': True},
         name='site_path'
@@ -30,6 +30,7 @@ urlpatterns += [
 ]
 
 urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
     path('tasks/', include('tasks.urls')),
@@ -37,7 +38,7 @@ urlpatterns += i18n_patterns(
     path('employees/', include('employees.urls')),
     path('inventory/', include('inventory.urls')),
     path('spareparts/', include('spareparts.urls')),
-    path('supplier/', include('supplier.urls')),
+    #path('supplier/', include('supplier.urls')),
     path('usage/', include('usage.urls')),
 )
 
