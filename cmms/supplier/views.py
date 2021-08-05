@@ -9,7 +9,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from inventory.models import DeviceAsset
 from .models import *
-from .forms import *
 from home.owner import UserAccessMixin
 # Create your views here.
 
