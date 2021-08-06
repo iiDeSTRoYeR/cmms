@@ -8,7 +8,7 @@
     {% csrf_token %}
     {{ form | crispy}}
     <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
-    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_detail' model.id %}';return false;">
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_detail' model.manufacturer.id %}';return false;">
   </form>
 </p>
 
