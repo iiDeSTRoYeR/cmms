@@ -3,33 +3,44 @@
 {% load i18n%}
 {% block content %}
 <style>
-input::placeholder {
-    font-style: italic;
+    input::placeholder {
+        font-style: italic;
 
-}
-.underline {
-  text-decoration: italic;
-  font-weight: lighter;
-}
+    }
+
+    .underline {
+        text-decoration: italic;
+        font-weight: lighter;
+    }
 </style>
 
 <h1> {%trans "Add/Edit a Manufacturer" %}</h1>
 <p>
-  <form action="" method="post">
+<form action="" method="post">
     {% csrf_token %}
     {{ form | crispy}}
+    {% url 'inventory:manu_create' as manu_create %}
+
     <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
-    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
-  </form>
+
+    {%if manu_create == request.get_full_path%}
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'inventory:manu_list' %}';return false;">
+    {%else%}
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'inventory:manu_detail' manufacturer.id %}';return false;">
+    {%endif%}
+
+</form>
 </p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-//dummy pull of an element containing text to match against
-var $div = $('div');
-//dummy variable containing what to search for to replace
-var underlineMe = '(Select an agent company if available)';
-//replace all occurances of our search string with a wrapped version
-var modifiedValue = $div.html().replace(new RegExp(underlineMe, 'g'), '<span class="underline">'+ underlineMe +'</span>');
-//update the value in the DOM
-$div.html(modifiedValue);
+    //dummy pull of an element containing text to match against
+    var $div = $('div');
+    //dummy variable containing what to search for to replace
+    var underlineMe = '(Select an agent company if available)';
+    //replace all occurances of our search string with a wrapped version
+    var modifiedValue = $div.html().replace(new RegExp(underlineMe, 'g'), '<span class="underline">' + underlineMe + '</span>');
+    //update the value in the DOM
+    $div.html(modifiedValue);
 </script>
 {% endblock %}
