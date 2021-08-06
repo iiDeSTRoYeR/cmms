@@ -8,3 +8,15 @@ def index(request):
 
 def CreateSupplierPage(request):
     return HttpResponse('<h1>CreateSupplierPage-supplier </h1>')
+
+def CreateManufacturerPage(request):
+    return HttpResponse('<h1>CreateManufacturerPage-supplier </h1>')
+
+def CreateWarrantyPage(request):
+    return HttpResponse('<h1>CreateWarrantyPage-supplier </h1>')
+
+def CreateAgentCompanyPage(request):
+    return HttpResponse('<h1>CreateAgentCompanyPage-supplier </h1>')
+
+
+
