@@ -1,0 +1,19 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+
+<h1>{{ accmodel.Name }}</h1>
+<h3>{% trans "Serial Numbers: " %}</h3>
+
+<ul>
+    {% for accdetail in accdetails %}
+    <li> {{accdetail.SerialNo}}
+        <a href="{% url 'inventory:accdetail_delete' accdetail.id %}"> {% trans '(Delete)' %} </a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'inventory:accdetail_update' accmodel.id %}" class="btn btn-primary mt-2">{%trans 'Add a new Serial Number'%}</a>
+<a href="{% url 'inventory:acc_detail' accmodel.accessory.id %}" class="btn btn-outline-primary mt-2">{%trans 'All Accessory Models'%}</a>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base_menu.html' %}
+{% load crispy_forms_tags %}
+{% load i18n%}
+{% block content %}
+<style>
+    input::placeholder {
+        font-style: italic;
+
+    }
+</style>
+
+<h1> {%trans "Add an individual Accessory" %}</h1>
+<p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.media.js }}
+    {{ form | crispy}}
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{{request.META.HTTP_REFERER}}';return false;">
+</form>
+</p>
+
+{% endblock %}

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'rosetta',
     'modeltranslation',
+    'smart_selects',
     #'geeks',
 
     'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
@@ -172,3 +173,6 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
+
+#JQUERY_URL = True
+USE_DJANGO_JQUERY = True

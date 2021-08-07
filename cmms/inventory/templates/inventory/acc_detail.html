@@ -1,0 +1,44 @@
+{% extends "base_menu.html" %}
+{% load i18n%}
+{% block content %}
+<style>
+    input::placeholder {
+        font-style: italic;
+        color: rgba(255, 0, 0, 0.23) !important;
+    }
+</style>
+
+<h1>{{ accessory.Name }}</h1>
+<h3 class="text-primary">{% trans 'Accessory Description: ' %}{{accessory.Description}}</h3>
+<a href="{% url 'inventory:acc_update' accessory.id %}"><i
+        class="fa fa-pencil position-relative position-absolute start-50 pt-5 ps-5"></i></a>
+<a href="{% url 'inventory:acc_delete' accessory.id %}"><i
+        class="fa fa-trash position-relative position-absolute start-50 pt-5 ps-4"></i></a>
+
+<h4> {% trans 'Accessory Models:' %}</h4>
+<ul>
+{% for accmodel in accmodels %}
+<li>
+    <a href="{% url 'inventory:accmodel_detail' accmodel.id%}">{{ accmodel.Name }}</a>
+    <a href="{% url 'inventory:accmodel_update' accmodel.id %}">{% trans '(Edit | '%}</a>
+    <a href="{% url 'inventory:accmodel_delete' accmodel.id %}">{% trans 'Delete)'%}</a>
+</li>
+
+{% endfor %}
+</ul>
+<br clear="all"/>
+{% if user.is_authenticated %}
+<h2 class="fst-italic">{%trans 'Add an Accessory Model' %}</h2>
+<p>
+    {% load crispy_forms_tags %}
+<form method="post" action="{% url 'inventory:accmodel_create' accessory.id %}">
+    {% csrf_token %}
+    {{ model_acc | crispy }}
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+    <input type="submit" value="{%trans 'All Accessories'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'inventory:acc_list' %}';return false;">
+</form>
+</p>
+{% endif %}
+
+{% endblock %}
