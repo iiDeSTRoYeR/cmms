@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-04 12:46+0300\n"
+"POT-Creation-Date: 2021-08-07 09:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\cmms\settings.py:167
+#: .\cmms\settings.py:169
 msgid "English"
 msgstr ""
 
-#: .\cmms\settings.py:168
+#: .\cmms\settings.py:170
 msgid "Arabic"
 msgstr ""
 
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Samsung, Toshiba, etc..."
 msgstr ""
 
-#: .\inventory\forms.py:16 .\inventory\templates\inventory\manu_detail.html:13
+#: .\inventory\forms.py:16 .\inventory\templates\inventory\manu_detail.html:17
 msgid "Agent Companies"
 msgstr ""
 
@@ -78,6 +78,152 @@ msgstr ""
 msgid "(Refrigerator, Computer, CBC, X-Ray, etc...)"
 msgstr ""
 
+#: .\inventory\forms.py:71
+msgid "Accessory General Name"
+msgstr ""
+
+#: .\inventory\forms.py:72
+msgid "Mouse, Screen, Probe, etc..."
+msgstr ""
+
+#: .\inventory\forms.py:75
+msgid "Accessory Description"
+msgstr ""
+
+#: .\inventory\forms.py:76
+msgid "Function and description of accessory"
+msgstr ""
+
+#: .\inventory\forms.py:85
+msgid "Accessory's Model Name"
+msgstr ""
+
+#: .\inventory\forms.py:96
+msgid "Accessory's Serial Number"
+msgstr ""
+
+#: .\inventory\forms.py:103
+msgid "Accessory's General Name"
+msgstr ""
+
+#: .\inventory\forms.py:105
+msgid "(Select a general accessory to which the serial number belongs to)"
+msgstr ""
+
+#: .\inventory\models.py:42
+msgid "Accessory's Model"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_delete.html:5
+msgid "Delete Accessory"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_delete.html:7
+msgid "Are you sure you want to delete the Accessory: "
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_delete.html:11
+#: .\inventory\templates\inventory\accdetail_delete.html:11
+#: .\inventory\templates\inventory\accmodel_delete.html:10
+#: .\inventory\templates\inventory\manu_delete.html:11
+#: .\inventory\templates\inventory\model_delete.html:10
+msgid "Yes, delete."
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_delete.html:12
+#: .\inventory\templates\inventory\acc_form.html:20
+#: .\inventory\templates\inventory\acc_form.html:23
+#: .\inventory\templates\inventory\accdetail_delete.html:12
+#: .\inventory\templates\inventory\accdetail_form.html:19
+#: .\inventory\templates\inventory\accmodel_delete.html:11
+#: .\inventory\templates\inventory\accmodel_form.html:11
+#: .\inventory\templates\inventory\manu_delete.html:12
+#: .\inventory\templates\inventory\manu_form.html:27
+#: .\inventory\templates\inventory\manu_form.html:30
+#: .\inventory\templates\inventory\model_delete.html:11
+#: .\inventory\templates\inventory\model_form.html:11
+msgid "Cancel"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:12
+msgid "Accessory Description: "
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:18
+msgid "Accessory Models:"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:23
+msgid "(Edit | "
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:24
+msgid "Delete)"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:31
+msgid "Add an Accessory Model"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:37
+#: .\inventory\templates\inventory\acc_form.html:17
+#: .\inventory\templates\inventory\accdetail_form.html:18
+#: .\inventory\templates\inventory\accmodel_form.html:10
+#: .\inventory\templates\inventory\manu_detail.html:39
+#: .\inventory\templates\inventory\manu_form.html:24
+#: .\inventory\templates\inventory\model_form.html:10
+msgid "Submit"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_detail.html:38
+msgid "All Accessories"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_form.html:10
+msgid "Add/Edit an Accessory"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_list.html:4
+msgid "Accessories"
+msgstr ""
+
+#: .\inventory\templates\inventory\acc_list.html:14
+#: .\inventory\templates\inventory\acc_list.html:17
+msgid "Create A new Accessory"
+msgstr ""
+
+#: .\inventory\templates\inventory\accdetail_delete.html:5
+msgid "Delete an individual Accessory"
+msgstr ""
+
+#: .\inventory\templates\inventory\accdetail_delete.html:7
+msgid "Are you sure you want to delete the individual Accessory: "
+msgstr ""
+
+#: .\inventory\templates\inventory\accdetail_form.html:12
+msgid "Add an individual Accessory"
+msgstr ""
+
+#: .\inventory\templates\inventory\accmodel_delete.html:4
+msgid "Delete Accessory Model"
+msgstr ""
+
+#: .\inventory\templates\inventory\accmodel_delete.html:6
+msgid "Are you sure you want to delete the Accessory Model: "
+msgstr ""
+
+#: .\inventory\templates\inventory\accmodel_detail.html:6
+msgid "Serial Numbers: "
+msgstr ""
+
+#: .\inventory\templates\inventory\accmodel_detail.html:11
+msgid "(Delete)"
+msgstr ""
+
+#: .\inventory\templates\inventory\accmodel_form.html:5
+msgid "Edit an Accessory Model"
+msgstr ""
+
 #: .\inventory\templates\inventory\manu_delete.html:5
 msgid "Delete Manufacturer"
 msgstr ""
@@ -86,42 +232,28 @@ msgstr ""
 msgid "Are you sure you want to delete the Manufacturer: "
 msgstr ""
 
-#: .\inventory\templates\inventory\manu_delete.html:11
-#: .\inventory\templates\inventory\model_delete.html:10
-msgid "Yes, delete."
-msgstr ""
-
-#: .\inventory\templates\inventory\manu_delete.html:12
-#: .\inventory\templates\inventory\manu_form.html:22
-#: .\inventory\templates\inventory\model_delete.html:11
-#: .\inventory\templates\inventory\model_form.html:11
-msgid "Cancel"
-msgstr ""
-
-#: .\inventory\templates\inventory\manu_detail.html:20
+#: .\inventory\templates\inventory\manu_detail.html:24
 msgid "Models:"
 msgstr ""
 
-#: .\inventory\templates\inventory\manu_detail.html:29
+#: .\inventory\templates\inventory\manu_detail.html:33
 msgid "Add a Model"
 msgstr ""
 
-#: .\inventory\templates\inventory\manu_detail.html:35
-#: .\inventory\templates\inventory\manu_form.html:21
-#: .\inventory\templates\inventory\model_form.html:10
-msgid "Submit"
-msgstr ""
-
-#: .\inventory\templates\inventory\manu_detail.html:36
+#: .\inventory\templates\inventory\manu_detail.html:40
 msgid "All Manufactures"
 msgstr ""
 
-#: .\inventory\templates\inventory\manu_form.html:16
+#: .\inventory\templates\inventory\manu_form.html:17
 msgid "Add/Edit a Manufacturer"
 msgstr ""
 
 #: .\inventory\templates\inventory\manu_list.html:4
 msgid "Manufacturers"
+msgstr ""
+
+#: .\inventory\templates\inventory\manu_list.html:14
+msgid "Create A new Manufacturer"
 msgstr ""
 
 #: .\inventory\templates\inventory\model_delete.html:4
@@ -132,23 +264,23 @@ msgstr ""
 msgid "Are you sure you want to delete the Model: "
 msgstr ""
 
-#: .\inventory\templates\inventory\model_detail.html:9
+#: .\inventory\templates\inventory\model_detail.html:12
 msgid "Device: "
 msgstr ""
 
-#: .\inventory\templates\inventory\model_detail.html:10
+#: .\inventory\templates\inventory\model_detail.html:13
 msgid "Voltage: "
 msgstr ""
 
-#: .\inventory\templates\inventory\model_detail.html:11
+#: .\inventory\templates\inventory\model_detail.html:14
 msgid "Amperage: "
 msgstr ""
 
-#: .\inventory\templates\inventory\model_detail.html:12
+#: .\inventory\templates\inventory\model_detail.html:15
 msgid "Phase: "
 msgstr ""
 
-#: .\inventory\templates\inventory\model_detail.html:13
+#: .\inventory\templates\inventory\model_detail.html:16
 msgid "Frequency: "
 msgstr ""
 

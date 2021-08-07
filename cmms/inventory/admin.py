@@ -10,12 +10,15 @@ class PhaseAdmin(TranslationAdmin):
 class DeviceAdmin(TranslationAdmin):
     model = Device
 
+class AccessoryAdmin(TranslationAdmin):
+    model = Accessory
+
 # Register your models here.
 admin.site.register(DeviceStatus)
 admin.site.register(DeviceClass)
 admin.site.register(AccModel)
-admin.site.register(Accessory)
-admin.site.register(AccDetails)
+admin.site.register(Accessory, AccessoryAdmin)
+admin.site.register(AccDetail)
 admin.site.register(DeviceMaintType)
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(Model)

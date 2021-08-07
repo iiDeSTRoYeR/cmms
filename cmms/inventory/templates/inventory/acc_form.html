@@ -1,0 +1,29 @@
+{% extends 'base_menu.html' %}
+{% load crispy_forms_tags %}
+{% load i18n%}
+{% block content %}
+<style>
+    input::placeholder {
+        font-style: italic;
+    }
+</style>
+<h1> {%trans "Add/Edit an Accessory" %}</h1>
+<p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    {% url 'inventory:acc_create' as acc_create %}
+
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+
+    {%if acc_create == request.get_full_path%}
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'inventory:acc_list' %}';return false;">
+    {%else%}
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'inventory:acc_detail' accessory.id %}';return false;">
+    {%endif%}
+
+</form>
+</p>
+{% endblock %}

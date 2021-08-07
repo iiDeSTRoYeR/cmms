@@ -13,7 +13,6 @@ SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 
 urlpatterns = [
-
     url(r'^site/(?P<path>.*)$', serve,
         {'document_root': SITE_ROOT, 'show_indexes': True},
         name='site_path'
@@ -40,11 +39,13 @@ urlpatterns += i18n_patterns(
     path('spareparts/', include('spareparts.urls')),
     path('supplier/', include('supplier.urls')),
     path('usage/', include('usage.urls')),
+    path('chaining/', include('smart_selects.urls')),
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += [
         re_path(r'^rosetta/', include('rosetta.urls'))
     ]
+
 #Test by Ahmed v1
 #Test by Ahmed v2
