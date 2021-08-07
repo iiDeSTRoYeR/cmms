@@ -46,7 +46,7 @@ class Member(models.Model):
     Experience = models.IntegerField(null=True, blank=True)
     MobileNo = models.IntegerField(
         unique=True,
-        validators=[MinValueValidator(500000000, 'Please Enter 10 Numbers.'),
+        validators=[MinValueValidator(500000000, 'Please Enter 9 Numbers.'),
                     MaxValueValidator(599999999, 'Please Enter Less than 10 Numbers.')])
     Salary = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
     Lapses = models.IntegerField(null=True, blank=True)
