@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
+from smart_selects.db_fields import ChainedForeignKey
+from django.utils.translation import gettext_lazy as _
 
 # from cmms.supplier.models import *
 # from cmms.spareparts.models import *
@@ -13,7 +15,7 @@ from django.contrib.auth.models import User
 
 class AccModel(models.Model):
     Name = models.CharField(max_length=50, unique=True)
-
+    accessory = models.ForeignKey('Accessory', on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.Name
 
@@ -21,17 +23,24 @@ class AccModel(models.Model):
 class Accessory(models.Model):
     Name = models.CharField(max_length=50, unique=True)
     Description = models.TextField(max_length=500, null=True)
-    accmodel = models.ForeignKey(AccModel, on_delete=models.CASCADE)
     #devices = models.ManyToManyField('Device')
 
     def __str__(self):
         return self.Name
 
 
-class AccDetails(models.Model):
+class AccDetail(models.Model):
     SerialNo = models.CharField(max_length=50, unique=True)
     accessory = models.ForeignKey(Accessory, on_delete=models.CASCADE)
-
+    accmodel = ChainedForeignKey(
+        AccModel,
+        chained_field="accessory",
+        chained_model_field="accessory",
+        show_all=False,
+        auto_choose=True,
+        sort=True,
+        verbose_name=_("Accessory's Model"),
+    )
     def __str__(self):
         return self.SerialNo
 
