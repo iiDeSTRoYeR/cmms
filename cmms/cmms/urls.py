@@ -37,7 +37,7 @@ urlpatterns += i18n_patterns(
     path('employees/', include('employees.urls')),
     path('inventory/', include('inventory.urls')),
     path('spareparts/', include('spareparts.urls')),
-    #path('supplier/', include('supplier.urls')),
+    path('supplier/', include('supplier.urls')),
     path('usage/', include('usage.urls')),
     path('chaining/', include('smart_selects.urls')),
 )
