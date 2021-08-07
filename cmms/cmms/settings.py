@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'rosetta',
     'modeltranslation',
     'smart_selects',
-    #'geeks',
 
     'django.contrib.humanize',  # human touch e.g. converts time to (32 mins ago)
 
