@@ -223,9 +223,18 @@ class AccDetailUpdateView(LoginRequiredMixin, UserAccessMixin, View):
 
     def get(self, request, pk):
         accmodel = AccModel.objects.get(id=pk)
-        #accdetail = get_object_or_404(AccDetail, pk)
         form = AccDetailForm(initial={'accessory': accmodel.accessory.id, 'accmodel': accmodel.id})
         ctx = {'form': form}
         return render(request, self.template_name, ctx)
 
+# >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+
+# >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+class DeviceCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
+    permission_required = 'device.add_device'
+    template_name = 'inventory/device_form.html'
+    success_url = reverse_lazy('inventory:device_list')
+    form_class = DeviceForm
+    model = Device
