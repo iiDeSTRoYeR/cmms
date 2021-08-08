@@ -230,6 +230,13 @@ class AccDetailUpdateView(LoginRequiredMixin, UserAccessMixin, View):
 # >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>> P L A C E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+def PlacesMainView(request):
+    return render(request, 'inventory/places_main.html', {})
+
+
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 class DeviceCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
