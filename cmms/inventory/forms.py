@@ -115,5 +115,29 @@ class AccDetailForm(forms.ModelForm):
         super(AccDetailForm,self).__init__(*args, **kwargs)
         self.fields['accmodel'].empty_label = 'TEST'
 '''
+# >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+class DeviceForm(forms.ModelForm):
+    Name = forms.CharField(
+        required=True, label=_('General Device Name'),
+        widget=forms.TextInput(attrs={'placeholder': _('Refrigerator, Computer, etc...')})
+    )
+
+    PPM_Cycle = forms.IntegerField(
+        required=True, label=_('PPM Cycle'),
+    )
+    Brief_Function_Description = forms.CharField(
+        required=True, label=_("Device's brief function description"),
+        widget=forms.Textarea(attrs={'placeholder': _('"e.g. Used for storing samples at low temperatures..."')})
+    )
+    accessories = forms.ModelMultipleChoiceField(queryset=Accessory.objects.all(),
+        required=False,
+        label=_('Accessories'),
+        #widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic; color:#6c757d;'})
+        widget=forms.CheckboxSelectMultiple()  #https://stackoverflow.com/questions/24031461/drop-down-with-checkboxes-in-django-form       to create dropdown checkboxes
+    )
+    class Meta:
+        model = Device
+        fields = ['Name', 'PPM_Cycle', 'Brief_Function_Description', 'accessories']

@@ -119,13 +119,6 @@ class Model(models.Model):
         return self.Name
 
 
-class Campus(models.Model):
-    Name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.Name
-
-
 class College(models.Model):
     Name = models.CharField(max_length=128, unique=True)
 
@@ -145,9 +138,18 @@ class Operator(models.Model):
 
         default=None)
 '''
+
+class Campus(models.Model):
+    Name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.Name
+
+
 class BldgNo(models.Model):
     Number = models.IntegerField()
     GPSCoor = models.CharField(max_length=100)
+    campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
 
     def __str__(self):
         return "Building Number: " + str(self.Number)
@@ -159,8 +161,14 @@ class LabRoom(models.Model):
     #Operator = models.ForeignKey(Operator, on_delete=models.SET_NULL, null=True)
     FloorNo = models.IntegerField()
     Operator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    campus = models.ForeignKey(Campus, on_delete=models.SET_NULL, null=True)
-    blgdno = models.ForeignKey(BldgNo, on_delete=models.SET_NULL, null=True)
+    campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
+    blgdno = ChainedForeignKey(
+        BldgNo,
+        chained_field="campus",
+        chained_model_field="campus",
+        show_all=False,
+        auto_choose=True,
+        sort=True)
 
 
     def __str__(self):
