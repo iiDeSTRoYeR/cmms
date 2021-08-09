@@ -13,7 +13,7 @@
 </ul>
 <a href="{% url 'inventory:acc_create' %} " class="btn btn-primary">{% trans 'Create A new Accessory' %}</a>
 {% else %}
-  <p>There are no Accessories in the database.</p>
+  <p>{% trans 'There are no Accessories in the database' %}.</p>
 <a href="{% url 'inventory:acc_create' %} " class="btn btn-primary">{% trans 'Create A new Accessory' %}</a>
 {% endif %}
 </p>

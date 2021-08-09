@@ -1,0 +1,75 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>{% trans "Colleges" %}</h1>
+<p>
+    <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
+        <option selected>{%trans 'Please Select a College' %}</option>
+        {% for college in college_list %}
+        <option value="{{college.id}}">
+            {{ college.Name }}
+        </option>
+        {% endfor %}
+    </select>
+</p>
+{% if user.is_authenticated %}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#collegeModal">
+    {% trans 'Add a new College' %}
+</button>
+{% endif %}
+
+<div class="modal fade" id="collegeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{% trans 'Add a College' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{%trans 'Cancel'%}
+                        </button>
+                        <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="id_depts">
+
+</div>
+
+<script>
+    $("#id_college").change(function () {
+        const url = $("#id_college").attr("data-dept-url");  // get the url of the `load_cities` view
+        const collegeId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'college_id': collegeId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (city) {
+                    html_data += `<option value="${city.id}">${city.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_city").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
+{% endblock %}

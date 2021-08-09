@@ -117,6 +117,28 @@ class AccDetailForm(forms.ModelForm):
 '''
 # >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+
+# >>>>>>>>>>>>>>>>>>>>>>>> C O L L E G E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+class CollegeForm(forms.ModelForm):
+    Name = forms.CharField(
+        required=True, label=_('College Name'),
+        widget=forms.TextInput(attrs={'placeholder': _('College of Engineering, College of Computers & Information, etc...')})
+    )
+
+    class Meta:
+        model = College
+        fields = '__all__'
+
+
+class DepartmentForm(forms.Form):
+    deptName = forms.CharField(
+        required=True, label=_('Department Name'),
+        widget=forms.TextInput(attrs={'placeholder': _('Electrical Engineering, Biology, etc...')})
+    )
+
+
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 class DeviceForm(forms.ModelForm):

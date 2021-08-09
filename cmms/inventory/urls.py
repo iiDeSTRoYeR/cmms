@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'inventory'
 urlpatterns = [
-
+    path('main/', views.InventoryMainView, name='main'),
     path('manufacturer/', views.ManuListView.as_view(), name='manu_list'),
     path('manufacturer/create', views.ManuCreateView.as_view(), name='manu_create'),
     path('manufacturer/<int:pk>/update', views.ManuUpdateView.as_view(), name='manu_update'),
@@ -29,6 +29,10 @@ urlpatterns = [
     path('accdetail/<int:pk>/delete', views.AccDetailDeleteView.as_view(), name='accdetail_delete'),
     path('accdetail/<int:pk>/update', views.AccDetailUpdateView.as_view(), name='accdetail_update'),
 
-    path('places/', views.PlacesMainView, name='places_main')
+    path('places/', views.PlacesMainView, name='places_main'),
+    path('places/college', views.CollegeListCreateView.as_view(), name='college_list'),
+    path('places/college/', views.CollegeListCreateView.as_view(), name='college_list'),
+    path('ajax/load-dept/', views.load_departments.as_view(), name='ajax_load_dept'),
+    path('ajax/load-dept/?college_id=<int:college_id>', views.load_departments, name='ajax_load_dept_return'),
 
 ]
