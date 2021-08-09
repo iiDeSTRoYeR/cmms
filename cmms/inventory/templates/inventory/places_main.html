@@ -1,0 +1,43 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+
+<h1 class="text-center">{% trans 'Places Application' %}</h1>
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-center pt-1">
+        <div class="col">
+            <a href="#">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{% trans 'Colleges' %}</h5>
+                        <p class="card-text">{%trans "Add or Edit a college, and it's underlying departments" %}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a href="#">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans 'Campus' %}</h5>
+                    <p class="card-text">{%trans 'Add or Edit a campus, and the buildings within this campus' %}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans 'Labs' %}</h5>
+                    <p class="card-text">{%trans 'Add or Edit a lab' %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

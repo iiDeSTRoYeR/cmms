@@ -14,6 +14,10 @@ from supplier.models import Manufacturer
 from home.owner import UserAccessMixin
 
 
+def InventoryMainView(request):
+    return render(request, 'inventory/main.html', {})
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>> M A N U F A C T U R E R ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 class ManuCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
     permission_required = 'manufacturer.add_manufacturer'
@@ -197,12 +201,13 @@ class AccModelDetailView(View):
 class AccDetailCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
     permission_required = 'accdetail.add_accdetail'
     template_name = 'inventory/accdetail_form.html'
-    #success_url = reverse_lazy('inventory:accmodel_detail')
+    # success_url = reverse_lazy('inventory:accmodel_detail')
     form_class = AccDetailForm
     model = AccDetail
-    #fields = '__all__'
+
+    # fields = '__all__'
     def get_success_url(self):
-        accmodel=self.object.accmodel
+        accmodel = self.object.accmodel
         return reverse('inventory:accmodel_detail', args=[accmodel.id])
 
 
@@ -212,8 +217,9 @@ class AccDetailDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
     template_name = 'inventory/accdetail_delete.html'
 
     def get_success_url(self):
-        accmodel=self.object.accmodel
+        accmodel = self.object.accmodel
         return reverse('inventory:accmodel_detail', args=[accmodel.id])
+
 
 class AccDetailUpdateView(LoginRequiredMixin, UserAccessMixin, View):
     permission_required = 'accdetail.add_accdetail'
@@ -227,7 +233,100 @@ class AccDetailUpdateView(LoginRequiredMixin, UserAccessMixin, View):
         ctx = {'form': form}
         return render(request, self.template_name, ctx)
 
+    def post(self, request, pk):
+        am = get_object_or_404(AccModel, id=pk)
+        accdetail = AccDetail(
+            SerialNo=request.POST['SerialNo'], accessory=am.accessory, accmodel=am)
+        accdetail.save()
+        return redirect(reverse('inventory:accmodel_detail', args=[pk]))
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>> A C C E S S O R I E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>> P L A C E S  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+def PlacesMainView(request):
+    return render(request, 'inventory/places_main.html', {})
+
+college_id=None
+class load_departments(View):
+    template_name = 'inventory/dept_list.html'
+
+    def get(self, request):
+        global college_id
+        college_id = request.GET.get('college_id')
+        dept = Department.objects.filter(college=college_id)
+        deptform = DepartmentForm()
+        ctx = {'dept': dept, 'deptform': deptform}
+        return render(request, self.template_name, ctx)
+
+
+class CollegeListCreateView(LoginRequiredMixin, UserAccessMixin, View):
+    template_name = 'inventory/college_list.html'
+    permission_required = 'college.add_college'
+    success_url = reverse_lazy('inventory:college_list')
+
+    def get(self, request):
+        college_list = College.objects.order_by('Name')
+        collegeform = CollegeForm()
+        ctx = {'college_list': college_list, 'form': collegeform}
+        return render(request, self.template_name, ctx)
+
+    def post(self, request):
+        global college_id
+        if request.POST.get('Name') == None:
+            dept = Department(
+                Name=request.POST['deptName'], college_id=int(college_id))
+            dept.save()
+            return redirect(reverse('inventory:college_list'))
+
+        elif request.POST.get('deptName') == None:
+            college = College(
+                Name=request.POST['Name']
+            )
+            college.save()
+            return redirect(reverse('inventory:college_list'))
+
+        # return redirect(reverse('inventory:ajax_load_dept_return', args=[college_id]))
+
+
+# class CollegeListCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
+#     model = College
+#     template_name = 'inventory/college_list.html'
+#     permission_required = 'college.add_college'
+#     form_class = CollegeForm
+#     success_url = reverse_lazy('inventory:college_list')
+#
+#     def get_context_data(self, **kwargs):
+#         kwargs['college_list'] = College.objects.order_by('Name')
+#         return super(CollegeListCreateView, self).get_context_data(**kwargs)
+#
+#     def post(self, request):
+#         college_id = request.GET.get('college_id')
+#         dept = Department(
+#             Name=request.POST['deptName'], college=college_id)
+#         dept.save()
+#         return redirect(reverse('inventory:college_list'))
+#         #return redirect(reverse('inventory:ajax_load_dept_return', args=[college_id]))
+
+# class DepartmentCreateView(LoginRequiredMixin, UserAccessMixin, View):
+#     permission_required = 'department.add_department'
+#     def post(self, request, college_id):
+#         college_id = request.GET.get('college_id')
+#         dept = Department(
+#             Name=request.POST['deptName'], college=college_id)
+#         dept.save()
+#         return redirect(reverse('inventory:ajax_load_dept_return', args=[college_id]))
+
+
+# Ajax
+# def load_departments(request):
+#     college_id = request.GET.get('college_id')
+#     dept = Department.objects.filter(college=college_id)
+#     deptform = DepartmentForm()
+#     return render(request, 'inventory/dept_list.html', {'dept': dept, 'deptform':deptform})
+
+
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
