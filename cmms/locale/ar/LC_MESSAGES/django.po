@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 09:27+0300\n"
+"POT-Creation-Date: 2021-08-09 19:15+0300\n"
 "PO-Revision-Date: 2021-08-07 09:28+0000\n"
 "Last-Translator: b'  <arabgamingnetwork@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Translated-Using: django-rosetta 0.9.6\n"
 
-#: .\cmms\settings.py:169
+#: .\cmms\settings.py:168
 msgid "English"
 msgstr ""
 
-#: .\cmms\settings.py:170
+#: .\cmms\settings.py:169
 msgid "Arabic"
 msgstr ""
 
@@ -71,7 +72,7 @@ msgstr "التردد (Hz)"
 msgid "(50, 60, 50/60, etc...)"
 msgstr "(50، 60، 50/60، غيره...)"
 
-#: .\inventory\forms.py:55
+#: .\inventory\forms.py:55 .\inventory\forms.py:147
 msgid "General Device Name"
 msgstr "اسم الجهاز العام"
 
@@ -111,6 +112,46 @@ msgstr "اسم الاكسسوار العام"
 msgid "(Select a general accessory to which the serial number belongs to)"
 msgstr "(اختر اسم الاكسسوار العام) "
 
+#: .\inventory\forms.py:125
+#, fuzzy
+#| msgid "Model Name"
+msgid "College Name"
+msgstr "اسم الموديل"
+
+#: .\inventory\forms.py:126
+msgid "College of Engineering, College of Computers & Information, etc..."
+msgstr ""
+
+#: .\inventory\forms.py:136
+msgid "Department Name"
+msgstr ""
+
+#: .\inventory\forms.py:137
+msgid "Electrical Engineering, Biology, etc..."
+msgstr ""
+
+#: .\inventory\forms.py:148
+#, fuzzy
+#| msgid "(Refrigerator, Computer, CBC, X-Ray, etc...)"
+msgid "Refrigerator, Computer, etc..."
+msgstr "(ثلاجة، كمبيوتر، جهاز تعداد خلايا الدم...)"
+
+#: .\inventory\forms.py:152
+msgid "PPM Cycle"
+msgstr ""
+
+#: .\inventory\forms.py:155
+msgid "Device's brief function description"
+msgstr ""
+
+#: .\inventory\forms.py:156
+msgid "\"e.g. Used for storing samples at low temperatures...\""
+msgstr ""
+
+#: .\inventory\forms.py:160 .\inventory\templates\inventory\acc_list.html:4
+msgid "Accessories"
+msgstr "الاكسسوارات"
+
 #: .\inventory\models.py:42
 msgid "Accessory's Model"
 msgstr "موديل الاكسسوار"
@@ -138,6 +179,8 @@ msgstr "نعم، حذف."
 #: .\inventory\templates\inventory\accdetail_form.html:19
 #: .\inventory\templates\inventory\accmodel_delete.html:11
 #: .\inventory\templates\inventory\accmodel_form.html:11
+#: .\inventory\templates\inventory\college_list.html:34
+#: .\inventory\templates\inventory\dept_list.html:21
 #: .\inventory\templates\inventory\manu_delete.html:12
 #: .\inventory\templates\inventory\manu_form.html:27
 #: .\inventory\templates\inventory\manu_form.html:30
@@ -170,6 +213,8 @@ msgstr "أضف موديل للاكسسوار"
 #: .\inventory\templates\inventory\acc_form.html:17
 #: .\inventory\templates\inventory\accdetail_form.html:18
 #: .\inventory\templates\inventory\accmodel_form.html:10
+#: .\inventory\templates\inventory\college_list.html:36
+#: .\inventory\templates\inventory\dept_list.html:20
 #: .\inventory\templates\inventory\manu_detail.html:39
 #: .\inventory\templates\inventory\manu_form.html:24
 #: .\inventory\templates\inventory\model_form.html:10
@@ -184,22 +229,20 @@ msgstr "جميع الاكسسوارات"
 msgid "Add/Edit an Accessory"
 msgstr "إضافة/تعديل الاكسسوار"
 
-#: .\inventory\templates\inventory\acc_list.html:4
-msgid "Accessories"
-msgstr "الاكسسوارات"
-
 #: .\inventory\templates\inventory\acc_list.html:14
 #: .\inventory\templates\inventory\acc_list.html:17
 msgid "Create A new Accessory"
 msgstr "إضافة اكسسوار جديد"
 
+#: .\inventory\templates\inventory\acc_list.html:16
+msgid "There are no Accessories in the database"
+msgstr ""
+
 #: .\inventory\templates\inventory\accdetail_delete.html:5
-#| msgid "Add an individual Accessory"
 msgid "Delete an individual Accessory"
 msgstr "مسح اكسسوار منفرد"
 
 #: .\inventory\templates\inventory\accdetail_delete.html:7
-#| msgid "Are you sure you want to delete the Accessory: "
 msgid "Are you sure you want to delete the individual Accessory: "
 msgstr "هل أنت متأكد من حذف الاكسسوار المنفرد:"
 
@@ -216,18 +259,98 @@ msgid "Are you sure you want to delete the Accessory Model: "
 msgstr "هل أنت متأكد من حذف موديل الاكسسوار:"
 
 #: .\inventory\templates\inventory\accmodel_detail.html:6
-#| msgid "Accessory's Serial Number"
 msgid "Serial Numbers: "
 msgstr "الأرقام التسلسلية للاكسسوار"
 
 #: .\inventory\templates\inventory\accmodel_detail.html:11
-#| msgid "Delete)"
 msgid "(Delete)"
 msgstr "(حذف)"
+
+#: .\inventory\templates\inventory\accmodel_detail.html:16
+#, fuzzy
+#| msgid "Accessory's Serial Number"
+msgid "Add a new Serial Number"
+msgstr "الرقم التسلسلي للاكسسوار"
+
+#: .\inventory\templates\inventory\accmodel_detail.html:17
+#, fuzzy
+#| msgid "Accessory Models:"
+msgid "All Accessory Models"
+msgstr "موديلات الاكسسوار:"
 
 #: .\inventory\templates\inventory\accmodel_form.html:5
 msgid "Edit an Accessory Model"
 msgstr "تعديل موديل الاكسسوار"
+
+#: .\inventory\templates\inventory\college_list.html:5
+#: .\inventory\templates\inventory\places_main.html:13
+msgid "Colleges"
+msgstr ""
+
+#: .\inventory\templates\inventory\college_list.html:8
+msgid "Please Select a College"
+msgstr ""
+
+#: .\inventory\templates\inventory\college_list.html:18
+msgid "Add a new College"
+msgstr ""
+
+#: .\inventory\templates\inventory\college_list.html:26
+#, fuzzy
+#| msgid "Add a Model"
+msgid "Add a College"
+msgstr "أضف موديل"
+
+#: .\inventory\templates\inventory\dept_list.html:3
+msgid "Departments"
+msgstr ""
+
+#: .\inventory\templates\inventory\dept_list.html:14
+msgid "There are no Departments in this College"
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:5
+#: .\inventory\templates\inventory\places_main.html:5
+msgid "Places Application"
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:13
+#, fuzzy
+#| msgid "Device: "
+msgid "Device"
+msgstr "الجهاز:"
+
+#: .\inventory\templates\inventory\main.html:14
+msgid "Add or Edit general devices"
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:24
+msgid "Places"
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:25
+msgid "Add or Edit a college, campus, department, building, or lab."
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:35
+#, fuzzy
+#| msgid "Manufacturers"
+msgid "Manufacturers & Models"
+msgstr "المصنعين"
+
+#: .\inventory\templates\inventory\main.html:36
+msgid "Add or Edit a Manufacturing company and their device models"
+msgstr ""
+
+#: .\inventory\templates\inventory\main.html:46
+#, fuzzy
+#| msgid "Accessories"
+msgid "Devices' Accessories"
+msgstr "الاكسسوارات"
+
+#: .\inventory\templates\inventory\main.html:47
+msgid "Add or Edit an Accessory for a device and its model"
+msgstr ""
 
 #: .\inventory\templates\inventory\manu_delete.html:5
 msgid "Delete Manufacturer"
@@ -292,6 +415,26 @@ msgstr "التردد:"
 #: .\inventory\templates\inventory\model_form.html:5
 msgid "Edit a Model"
 msgstr "تعديل موديل"
+
+#: .\inventory\templates\inventory\places_main.html:14
+msgid "Add or Edit a college, and it's underlying departments"
+msgstr ""
+
+#: .\inventory\templates\inventory\places_main.html:24
+msgid "Campus"
+msgstr ""
+
+#: .\inventory\templates\inventory\places_main.html:25
+msgid "Add or Edit a campus, and the buildings within this campus"
+msgstr ""
+
+#: .\inventory\templates\inventory\places_main.html:34
+msgid "Labs"
+msgstr ""
+
+#: .\inventory\templates\inventory\places_main.html:35
+msgid "Add or Edit a lab"
+msgstr ""
 
 #~ msgid "(Select an agent company if available)"
 #~ msgstr "(اختر الشركة الوكيلة إن وجد)"

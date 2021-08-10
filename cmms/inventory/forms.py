@@ -106,6 +106,7 @@ class AccDetailForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'font-style:italic;'})
     )
 
+
     class Meta:
         model = AccDetail
         fields = '__all__'
