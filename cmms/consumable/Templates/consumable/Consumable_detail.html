@@ -1,0 +1,41 @@
+{% extends "base_menu.html" %}
+{% load i18n%}
+{% block content %}
+<style>
+    input::placeholder {
+        font-style: italic;
+        color: rgba(255, 0, 0, 0.23) !important;
+    }
+</style>
+
+<h1>{{ consumable.id }}</h1>
+<a href="{% url 'consumable:Consumable_update'consumable.id %}"><i
+        class="fa fa-pencil position-relative position-absolute start-50 pt-5 ps-5"></i></a>
+<a href="{% url 'consumable:Consumable_delete' consumable.id %}"><i
+        class="fa fa-trash position-relative position-absolute start-50 pt-5 ps-4"></i></a>
+
+
+
+<h3> {% trans 'consumable:' %}</h3>
+
+{% for consumable in consumable %}
+<p>
+    <a href="{%url consumable:Consumable_detail' model.id %}"> {{ consumable.id }} </a>
+</p>
+{% endfor %}
+<br clear="all"/>
+{% if user.is_authenticated %}
+<h2 class="fst-italic">{%trans 'Add a consumable' %}</h2>
+<p>
+    {% load crispy_forms_tags %}
+<form method="post" action="{% url 'consumable:Consumable_model_create' consumable.id %}">
+    {% csrf_token %}
+    {{ model_consumable | crispy }}
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+    <input type="submit" value="{%trans 'All Consumables'%}" class="btn btn-outline-primary mt-2"
+           onclick="window.location.href='{% url 'consumable:Consumable_list' %}';return false;">
+</form>
+</p>
+{% endif %}
+
+{% endblock %}

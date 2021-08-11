@@ -1,0 +1,19 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+
+<a href="{% url 'consumable:Consumable_model_update' model.id %}"><i
+        class="fa fa-pencil position-relative position-absolute start-50 pt-5 ps-5"></i></a>
+<a href="{% url 'consumable:Consumable_model_delete' model.id %}"><i
+        class="fa fa-trash position-relative position-absolute start-50 pt-5 ps-4"></i></a>
+
+<h1>{{ consumable.id}}</h1>
+<ul>
+    <li>{% trans "Price : " %} {{Consumable.Price}}</li>
+    <li>{% trans "Member: " %} {{ Consumable.Member.Name}} V</li>
+    <li>{% trans "Date of Bill: " %} {{ Consumable.DateofBill}} A</li>
+    <li>{% trans "Bill PDF: " %} {{Consumable.Billpdf }}</li>
+    <li>{% trans "CostClass: " %} {{Consumable.CostClass.Value}}</li>
+    <li>{% trans "CostType: " %} {{Consumable.CostType.Value}}</li>
+</ul>
+{% endblock %}
