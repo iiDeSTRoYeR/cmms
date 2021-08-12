@@ -6,7 +6,7 @@ from modeltranslation.forms import TranslationModelForm
 from django.utils.translation import gettext_lazy as _
 
 
-class CostClassForm(forms.ModelForm):
+class CostClass(forms.ModelForm):
     Title = forms.ModelChoiceField(
         label=_('Cost Class'),
         queryset=CostClass.objects.all(),
@@ -19,7 +19,7 @@ class CostClassForm(forms.ModelForm):
         model = CostClass
         fields = ['Title', ]
 
-class ConsumableForm(forms.ModelForm):
+class Consumable(forms.ModelForm):
     Price = forms.DecimalField(
         label=_('Price'),
         required=True, decimal_places=2, max_digits=9,

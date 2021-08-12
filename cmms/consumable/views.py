@@ -86,7 +86,7 @@ class CostClassDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
 class CostClassUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
     template_name = 'consumable/CostClass_form.html'
     model = CostClass
-    form_class = CostClassForm
+    form_class = CostClass
     permission_required = 'costclass.change_costclass'
 
     def get_success_url(self):
@@ -96,7 +96,7 @@ class CostClassUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
 class ConsumableUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
     template_name = 'consumable/modelCon_form.html'
     model = Consumable
-    form_class = ConsumableForm
+    form_class = Consumable
     permission_required = 'consumable.change_consumable'
 
     def get_success_url(self):
