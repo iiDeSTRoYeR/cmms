@@ -136,7 +136,9 @@ class DepartmentForm(forms.Form):
         required=True, label=_('Department Name'),
         widget=forms.TextInput(attrs={'placeholder': _('Electrical Engineering, Biology, etc...')})
     )
-
+    # class Meta:
+    #     model = Department
+    #     fields = ['Name']
 
 
 

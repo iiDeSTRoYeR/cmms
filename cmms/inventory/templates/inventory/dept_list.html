@@ -2,23 +2,74 @@
 {% load crispy_forms_tags %}
 <h1>{% trans "Departments" %}</h1>
 <p>
-{% if dept  %}
+    {% if dept %}
 <ul>
-  {% for department in dept %}
+    {% for department in dept %}
     <li>
         {{ department.Name }}
+        {% if user.is_authenticated %}
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deptModal">
+            {% trans 'Edit' %}
+        </button>
+        {% endif %}
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 {% else %}
-  <p>{% trans 'There are no Departments in this College' %}.</p>
+<p>{% trans 'There are no Departments in this College' %}.</p>
 {% endif %}
 </p>
-<form action="" method="post">
+{% if perms.inventory.add_department %}
+<form action="">
     {% csrf_token %}
     {{ deptform | crispy}}
-    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
-    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
-           onclick="window.location.href='{% url 'inventory:acc_list' %}';return false;">
-
 </form>
+<button class="btn btn-primary mt-2" id="dept_submit">{%trans 'Submit'%}</button>
+<input type="submit" value="{%trans 'Reset'%}" class="btn btn-outline-primary mt-2"
+       onclick="document.getElementById('id_deptName').value = '';return false;">
+{% endif %}
+
+<div class="modal fade" id="deptModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{% trans 'Edit a Department' %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ deptUpdateform | crispy}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{%trans 'Cancel'%}
+                        </button>
+                        <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#dept_submit").click(
+        function () {
+            const url = $("#id_college").attr("data-dept-url");
+            const collegeId = $("#id_college").val();
+            const newdept = $("#id_deptName").val();
+            console.log(collegeId);
+            $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {
+                        'college_id': collegeId,       // add the country id to the GET parameters
+                        'deptName': newdept
+                    },
+                    success: function (data) {
+                         $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                    }
+                }
+            )
+        }
+    )
+</script>
