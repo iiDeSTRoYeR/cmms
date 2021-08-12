@@ -265,7 +265,6 @@ class load_departments(View):
 
     def post(self, request):
         college_id = request.POST.get('college_id')
-        print(college_id)
 
         deptform = DepartmentForm(request.POST)
         print(request.POST)
