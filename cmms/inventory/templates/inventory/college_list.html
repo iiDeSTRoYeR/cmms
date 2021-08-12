@@ -8,13 +8,13 @@
         <option selected>{%trans 'Please Select a College' %}</option>
         {% for college in college_list %}
         <option value="{{college.id}}">
-<!--            onclick="getStoreView(e, {{college.id}})"-->
+            <!--            onclick="getStoreView(e, {{college.id}})"-->
             {{ college.Name }}
         </option>
         {% endfor %}
     </select>
 </p>
-{% if user.is_authenticated %}
+{% if perms.inventory.add_college %}
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#collegeModal">
     {% trans 'Add a new College' %}
 </button>
@@ -42,6 +42,7 @@
     </div>
 </div>
 
+
 <div id="id_depts">
 
 </div>
@@ -50,7 +51,6 @@
     $("#id_college").change(function () {
         const url = $("#id_college").attr("data-dept-url");  // get the url of the `load_cities` view
         const collegeId = $(this).val();  // get the selected country ID from the HTML input
-
         $.ajax({                       // initialize an AJAX request
             url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
             data: {
@@ -58,19 +58,17 @@
             },
             success: function (data) {   // `data` is the return of the `load_cities` view function
                 $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
-                /*
 
+                /*
                 let html_data = '<option value="">---------</option>';
                 data.forEach(function (city) {
                     html_data += `<option value="${city.id}">${city.name}</option>`
                 });
                 console.log(html_data);
                 $("#id_city").html(html_data);
-
                 */
             }
         });
-
     });
 </script>
 {% endblock %}
