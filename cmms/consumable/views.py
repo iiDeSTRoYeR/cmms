@@ -15,6 +15,9 @@ from home.owner import UserAccessMixin
 
 # Create your views here.
 
+def consumableMainView(request):
+    return render(request, 'consumable/main.html', {})
+
 class CostClassCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
     permission_required = 'costclass.add_costclass'
     template_name = 'consumable/CostClass_form.html'
