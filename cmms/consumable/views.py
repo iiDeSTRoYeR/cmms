@@ -15,104 +15,87 @@ from home.owner import UserAccessMixin
 
 # Create your views here.
 
-def ConsumableMainView(request):
-    return render(request, 'consumable/main.html', {})
+class CostClassCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
+    permission_required = 'costclass.add_costclass'
+    template_name = 'consumable/CostClass_form.html'
+    success_url = reverse_lazy('consumable:CostClass_list')
+    form_class = CostClass
+    model = CostClass
 
 
-class ConsumableCreateView(LoginRequiredMixin, UserAccessMixin, CreateView):
+class CostClassListView(ListView):
+    model = CostClass
+    template_name = 'consumable/CostClass_list.html'
+
+
+class CostClassDetailView(DetailView):
+    model = CostClass
+    template_name = 'consumable/CostClass_detail.html'
+
+    def get(self, request, pk):
+        x = CostClass.objects.get(id=pk)
+        models = Consumable.objects.filter(CostClass=x).order_by('Title')
+        model_CostClass = Consumable()
+        context = {'CostClass': x, 'models': models, 'model_CostClass': model_CostClass}
+        return render(request, self.template_name, context)
+
+
+class ConsumableCreateView(LoginRequiredMixin, UserAccessMixin, View):
     permission_required = 'consumable.add_consumable'
-    template_name = 'consumable/Consumable_form.html'
-    success_url = reverse_lazy('consumable:Consumable_list')
-    form_class = ConsumableForm
-    model = Consumable
-
-
-class ConsumableListView(ListView):
-    model = Consumable
-    template_name = 'consumable/Consumable_list.html'
-
-
-class ConsumableDetailView(DetailView):
-    model = Consumable
-    template_name = 'consumable/Consumable_detail.html'
-
-    def get(self, request, pk):
-        x = Consumable.objects.get(id=pk)
-        Consumable_models =Consumable.objects.filter(Consumable=x).order_by('Cost Class')
-        model_Consumable = Consumable()
-        context = {'consumable': x, 'Consumable_models': Consumable_models, 'model_Consumable': model_Consumable}
-        return render(request, self.template_name, context)
-
-    class ConsumableListView(ListView):
-        model = Consumable
-        template_name = 'consumable/Consumable_list.html'
-
-class ConsumableDetailView(DetailView):
-    model = Consumable
-    template_name = 'consumable/Consumable_detail.html'
-
-    def get(self, request, pk):
-        x = Consumable.objects.get(id=pk)
-        Consumablemodels = Consumable.objects.filter(Consumable=x).order_by('Cost Class')
-        model_Consumable = Consumable()
-        context = {'Consumable': x, 'Consumablemodels': Consumablemodels, 'model_Consumable': model_Consumable}
-        return render(request, self.template_name, context)
-
-class ConsumableDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
-    model = Consumable
-    template_name = 'consumable/Consumable_delete.html'
-    success_url = reverse_lazy('consumable:Consumable_list')
-
-
-
-class ConsumableUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
-    template_name = 'consumable/Consumable_form.html'
-    model = Consumable
-    form_class = ConsumableForm
-    permission_required = 'Consumable.change_Consumable'
-
-
-    def get_success_url(self):
-        return reverse('consumable:Consumable_detail', args=[self.object.id])
-
-
-class ModelCreateView(LoginRequiredMixin, UserAccessMixin, View):
-    permission_required = 'model.add_model'
 
     def post(self, request, pk):
-        m = get_object_or_404(Consumable, id=pk)
-        model = Consumable(
-            Name=request.POST['price'], Member_id=request.POST['Member'],
-            DateofBill=request.POST['Date of Bill'], Billpdf=request.POST['Bill PDF'],
-            CostClass_id=request.POST['Cost Class'], CostType_id=request.POST['Cost Type'],
-            consumable=C)
+        c = get_object_or_404(Consumable, id=pk)
+        consumable = Consumable(
+            Price =request.POST['Price'], DateofBill=request.POST['Date of Bill'],
+            Billpdf=request.POST['Bill PDF'], Member_id=request.POST['Member'],
+            CostType_id=request.POST['Cost Type'], consumable=c)
 
-        model.save()
+        consumable.save()
 
         return redirect(reverse('consumable:Consumable_detail', args=[pk]))
 
 
-class ModelDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
-    permission_required = 'model.delete_model'
+class ConsumableDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
+    permission_required = 'consumable.delete_consumable'
     model = Consumable
     template_name = 'consumable/modelCon_delete.html'
 
-    # success_url = reverse_lazy('inventory:manufacturer')
+    # success_url = reverse_lazy('consumable:CostClass')
 
     def get_success_url(self):
-        consumable = self.object.consumable
-        return reverse('consumable:Consumable_detail', args=[Consumable.id])
+        CostClass = self.object.CostClass
+        return reverse('consumable:CostClass_detail', args=[CostClass.id])
 
 
-class ModelDetailView(DetailView):
+class ConsumableDetailView(DetailView):
     model = Consumable
     template_name = 'consumable/modelCon_detail.html'
 
-class ModelUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
-    template_name = 'consumable/modelCon_form.html'
-    model = Consumable
-    form_class = Consumable
-    permission_required = 'model.change_model'
+
+class CostClassDeleteView(LoginRequiredMixin, UserAccessMixin, DeleteView):
+    model = CostClass
+    template_name = 'consumable/CostClass_delete.html'
+    success_url = reverse_lazy('consumable:CostClass_list')
+
+    permission_required = 'costclass.delete_costclass'
+
+
+class CostClassUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
+    template_name = 'consumable/CostClass_form.html'
+    model = CostClass
+    form_class = CostClassForm
+    permission_required = 'costclass.change_costclass'
 
     def get_success_url(self):
-        return reverse('consumable:model_detail', args=[self.object.id])
+        return reverse('consumable:CostClass_detail', args=[self.object.id])
+
+
+class ConsumableUpdateView(LoginRequiredMixin, UserAccessMixin, UpdateView):
+    template_name = 'consumable/modelCon_form.html'
+    model = Consumable
+    form_class = ConsumableForm
+    permission_required = 'consumable.change_consumable'
+
+    def get_success_url(self):
+        return reverse('consumable:consumable_detail', args=[self.object.id])
+

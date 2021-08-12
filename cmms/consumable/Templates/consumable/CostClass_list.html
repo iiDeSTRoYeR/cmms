@@ -1,0 +1,19 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+<h1>{% trans "Cost Class" %}</h1>
+<p>
+{% if CostClass_list %}
+<ul>
+  {% for CostClass in CostClass_list %}
+    <li>
+        <a href="{% url 'consumable:CostClass_detail'  CostClass.id %}">{{ CostClass.Title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'consumable:CostClass_create' %} " class="btn btn-primary">{% trans 'Create A new CostClass' %}</a>
+{% else %}
+  <p>There are no CostClass in the database.</p>
+{% endif %}
+</p>
+{% endblock %}

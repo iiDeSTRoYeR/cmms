@@ -1,16 +1,5 @@
-{% extends "base_menu.html" %}
-{% load i18n %}
+{%extends 'base_menu.html' %}
 {% block content %}
-
-<h1 class="text-center">{% trans "Consumable" %}</h1>
-<div class>
-     <a href="{% url 'consumable:Consumable_list' %}">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{% trans 'Consumables' %}</h5>
-        <p class="card-text">{%trans 'Add or Edit Consumable' %}</p>
-      </div>
-    </div>
-  </div>
+{% load i18n %}
+<p> {% translate "Hello World" %} </p>
 {% endblock %}

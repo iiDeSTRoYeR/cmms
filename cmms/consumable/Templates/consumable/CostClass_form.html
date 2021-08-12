@@ -14,21 +14,21 @@
     }
 </style>
 
-<h1> {%trans "Add/Edit a Consumable" %}</h1>
+<h1> {%trans "Add/Edit a Cost Class" %}</h1>
 <p>
 <form action="" method="post">
     {% csrf_token %}
     {{ form | crispy}}
-    {% url 'consumable:Consumable_create' as Consumable_create %}
+    {% url 'consumable:CostClass_create' as CostClass_create %}
 
     <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
 
-    {%if Consumable_create == request.get_full_path%}
+    {%if CostClass_create == request.get_full_path%}
     <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
-           onclick="window.location.href='{% url 'consumable:Consumable_list' %}';return false;">
+           onclick="window.location.href='{% url 'consumable:CostClass_list' %}';return false;">
     {%else%}
     <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2"
-           onclick="window.location.href='{% url 'consumable:Consumable_detail' consumable.id %}';return false;">
+           onclick="window.location.href='{% url 'consumable:CostClass_detail' CostClass.id %}';return false;">
     {%endif%}
 
 </form>
