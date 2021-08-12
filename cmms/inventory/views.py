@@ -267,12 +267,6 @@ class load_departments(View):
         college_id = request.POST.get('college_id')
         print(college_id)
 
-        # dept = Department(
-        #     Name=request.POST.get('newdept'))
-        # if dept.is_valid():
-        #     dept = DepartmentForm(college_id=college_id)
-        #     dept.save()
-
         deptform = DepartmentForm(request.POST)
         print(request.POST)
         if deptform.is_valid():
@@ -281,9 +275,13 @@ class load_departments(View):
             department1.college_id = college_id
             department1.save()
 
-        print('hiii')
-        dept = Department.objects.filter(college=college_id)
-        ctx = {'dept': dept, 'deptform': deptform}
+            deptform = DepartmentForm()         #clears the form
+            dept = Department.objects.filter(college=college_id)        #gets the updated department list
+            ctx = {'dept': dept, 'deptform': deptform}
+            return render(request, self.template_name, ctx)
+
+        dept = Department.objects.filter(college=college_id)             #gets the updated department list
+        ctx = {'dept': dept, 'deptform': deptform}                       #renders form with errors
         return render(request, self.template_name, ctx)
 
 class CollegeListCreateView(View):
