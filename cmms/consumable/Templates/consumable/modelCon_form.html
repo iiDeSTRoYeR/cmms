@@ -1,0 +1,15 @@
+{% extends 'base_menu.html' %}
+{% load crispy_forms_tags %}
+{% load i18n%}
+{% block content %}
+<h1> {%trans "Edit a Consumable" %}</h1>
+<p>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form | crispy}}
+    <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary mt-2">
+    <input type="submit" value="{%trans 'Cancel'%}" class="btn btn-outline-primary mt-2" onclick="window.location.href='{% url 'consumable:CostClass_detail' Consumable.CostClass.id %}';return false;">
+  </form>
+</p>
+
+{% endblock %}

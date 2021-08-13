@@ -1,0 +1,26 @@
+{% extends "base_menu.html" %}
+{% load i18n %}
+{% block content %}
+
+<h1 class="text-center">{% trans "Consumables" %}</h1>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+
+  <div class="col">
+    <a href="{% url 'consumable:CostClass_list' %}">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{% trans 'Cost Class' %}</h5></a>
+     <a href="{% url 'consumable:CostClass_create' %}">
+        <p class="card-text">{%trans 'Add or Edit a Cost Class' %}</p>
+       </a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

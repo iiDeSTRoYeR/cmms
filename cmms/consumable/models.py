@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 
 
-class CostClass (models.Model):
+class CostClass(models.Model):
     x = [
         ('محروقات','محروقات'),('ايجار','ايجار'),('مواصلات','مواصلات'),('مستهلكات','مستهلكات'),
         ('مصروفات أخرى','مصروفات أخرى')
