@@ -31,8 +31,5 @@ urlpatterns = [
 
     path('places/', views.PlacesMainView, name='places_main'),
     path('places/college', views.CollegeListCreateView.as_view(), name='college_list'),
-    path('places/college/', views.CollegeListCreateView.as_view(), name='college_list'),
     path('ajax/load-dept/', views.load_departments.as_view(), name='ajax_load_dept'),
-    path('ajax/load-dept/?college_id=<int:college_id>', views.load_departments, name='ajax_load_dept_return'),
-
 ]

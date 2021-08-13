@@ -1,0 +1,63 @@
+{% load i18n %}
+{% load static%}
+{% load crispy_forms_tags %}
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{% trans 'Add a College' %}</h5>
+    <button id="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form action="" method="">
+        {% csrf_token %}
+        {% for field1 in form %}
+        <div class="form-group {% if field1.errors %}alert alert-danger{% endif %}">
+            {{ field1.errors }}
+            {{ field1.label_tag }}
+            {{ field1 }}
+        </div>
+        {% endfor %}
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">{%trans 'Cancel'%}
+        </button>
+        <button class="btn btn-primary mt-2" id="college_submit">{%trans 'Submit'%}</button>
+    </div>
+</div>
+
+
+<script>
+    document.formHasErrors = {%if field1.errors %} console.log('true')  {% else %} console.log('false') {%endif %};
+</script>
+
+
+{% if not form.errors %}
+<script>
+$(document).ready(function () {
+        $("#closeModal").trigger('click');
+    }
+)
+</script>
+{%endif%}
+
+
+<script>
+    $("#college_submit").click(
+        function () {
+            console.log('Col Click');
+            const url = $("#collegeModal").attr("data-col-url");
+            const newcol = $("#id_Name").val();
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    'Name': newcol
+                },
+                success: function (data) {
+                    $("#collegeModal").html(data);
+
+                }
+            })
+        }
+    )
+
+
+</script>

@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static%}
+
 <h1>{% trans "Colleges" %}</h1>
 <p>
     <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
@@ -14,33 +16,21 @@
         {% endfor %}
     </select>
 </p>
-{% if perms.inventory.add_college %}
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#collegeModal">
-    {% trans 'Add a new College' %}
-</button>
-{% endif %}
 
-<div class="modal fade" id="collegeModal" tabindex="-1">
+
+<div class="modal fade" tabindex="-1" id="bcollegeModal">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{% trans 'Add a College' %}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form | crispy}}
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{%trans 'Cancel'%}
-                        </button>
-                        <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary"></input>
-                    </div>
-                </form>
-            </div>
+        <div class="modal-content" id="collegeModal" data-col-url="{%url 'inventory:college_list' %}">
+
         </div>
     </div>
 </div>
+
+{% if perms.inventory.add_college %}
+<button type="button" id="id_AddCollege" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bcollegeModal" >
+    {% trans 'Add a new College' %}
+</button>
+{% endif %}
 
 
 <div id="id_depts">
@@ -70,5 +60,23 @@
             }
         });
     });
+
+    $("#id_AddCollege").click(
+        function () {
+            console.log('Add Col Click');
+            const url = $("#collegeModal").attr("data-col-url");
+            $.ajax({
+                url: url,
+                type: 'post',
+                success: function (data) {
+                    console.log('Add Col Click');
+                    $("#collegeModal").html(data);
+                }
+            })
+        }
+    )
+
 </script>
+
+
 {% endblock %}

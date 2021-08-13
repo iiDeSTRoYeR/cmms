@@ -6,7 +6,7 @@
 <ul>
     {% for department in dept %}
     <li>
-        {{ department.Name }}
+        {{ department.deptName }}
         {% if user.is_authenticated %}
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deptModal">
             {% trans 'Edit' %}
@@ -22,7 +22,14 @@
 {% if perms.inventory.add_department %}
 <form action="">
     {% csrf_token %}
-    {{ deptform | crispy}}
+    {% for field in deptform %}
+    <div class="form-group {% if field.errors %}alert alert-danger{% endif %}">
+        {{ field.errors }}
+        {{ field.label_tag }}
+        {{ field }}
+    </div>
+    {% endfor %}
+
 </form>
 <button class="btn btn-primary mt-2" id="dept_submit">{%trans 'Submit'%}</button>
 <input type="submit" value="{%trans 'Reset'%}" class="btn btn-outline-primary mt-2"
@@ -66,7 +73,7 @@
                         'deptName': newdept
                     },
                     success: function (data) {
-                         $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                        $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
                     }
                 }
             )

@@ -256,12 +256,15 @@ def PlacesMainView(request):
 class load_departments(View):
     template_name = 'inventory/dept_list.html'
 
-    def get(self, request):
-        college_id = request.GET.get('college_id')
+    def the_get(self, request, college_id, deptform):
         dept = Department.objects.filter(college=college_id)
-        deptform = DepartmentForm()
         ctx = {'dept': dept, 'deptform': deptform}
         return render(request, self.template_name, ctx)
+
+    def get(self, request):
+        college_id = request.GET.get('college_id')
+        deptform = DepartmentForm()
+        return self.the_get(request, college_id, deptform)
 
     def post(self, request):
         college_id = request.POST.get('college_id')
@@ -270,19 +273,16 @@ class load_departments(View):
         print(request.POST)
         if deptform.is_valid():
             department1 = Department()
-            department1.Name = deptform.cleaned_data['deptName']
+            department1.deptName = deptform.cleaned_data['deptName']
             department1.college_id = college_id
             department1.save()
 
             deptform = DepartmentForm()         #clears the form
-            dept = Department.objects.filter(college=college_id)        #gets the updated department list
-            ctx = {'dept': dept, 'deptform': deptform}
-            return render(request, self.template_name, ctx)
 
-        dept = Department.objects.filter(college=college_id)             #gets the updated department list
-        ctx = {'dept': dept, 'deptform': deptform}                       #renders form with errors
-        return render(request, self.template_name, ctx)
+        return self.the_get(request, college_id, deptform)
 
+
+@method_decorator(csrf_exempt, name='dispatch')
 class CollegeListCreateView(View):
     template_name = 'inventory/college_list.html'
     success_url = reverse_lazy('inventory:college_list')
@@ -295,10 +295,19 @@ class CollegeListCreateView(View):
 
     def post(self, request):
         print(request.POST)
-        college = College(
-            Name=request.POST['Name'])
-        college.save()
-        return redirect(reverse('inventory:college_list'))
+        if request.POST == {}:
+            collegeform = CollegeForm()
+        else:
+            collegeform = CollegeForm(request.POST)
+            if collegeform.is_valid():
+                college = College()
+                college.Name = collegeform.cleaned_data['Name']
+                college.save()
+
+        ctx = {'form': collegeform}
+        return render(request, 'inventory/college_create.html', ctx)
+
+        #return redirect(reverse('inventory:college_list'))
 
 class DepartmentUpdateView(LoginRequiredMixin, UserAccessMixin, View):
     permission_required = 'department.change_department'
@@ -311,6 +320,7 @@ class DepartmentUpdateView(LoginRequiredMixin, UserAccessMixin, View):
         return render(request, self.template_name, ctx)
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>> P L A C E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # >>>>>>>>>>>>>>>>>>>>>>>> D E V I C E  ----  START >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

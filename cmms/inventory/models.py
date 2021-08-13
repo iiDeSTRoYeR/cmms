@@ -126,11 +126,11 @@ class College(models.Model):
         return self.Name
 
 class Department(models.Model):
-    Name = models.CharField(max_length=128, unique=True)
+    deptName = models.CharField(max_length=128, unique=True, verbose_name='Name')
     college = models.ForeignKey(College, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.Name
+        return self.deptName
 '''
 class Operator(models.Model):
     Name = models.CharField(max_length=100, unique=True)
