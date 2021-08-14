@@ -25,19 +25,15 @@
 
 <script>
     $("#deptModal_submit").click(function () {
-        const url = "{% url 'inventory:ajax_edit_dept' %}";
+        const url = $('.editDept').attr("data-url");
         const newdept = $("#deptNameUpdate").val();
-        const collegeId = $("#id_college").val();  // get the selected country ID from the HTML input
-        console.log(newdept);
         $.ajax({
             url: url,
             type: 'post',
             data: {
                 'deptName': newdept,
-                'college_id': collegeId
             },
             success: function (data) {
-                $("#deptModalContent").html(data.html_updateform);
                 if (data.form_is_valid) {
                     $("#deptModal").modal("hide");
                     console.log('Im alliiivveee');
@@ -54,6 +50,9 @@
                             $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
                         }
                     });
+                }
+                else {
+                    $("#deptModalContent").html(data.html_updateform);
                 }
             }
         })

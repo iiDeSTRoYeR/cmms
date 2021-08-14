@@ -2,31 +2,16 @@
 {% load crispy_forms_tags %}
 <h1>{% trans "Departments" %}</h1>
 
-
 <p>
     {% if dept %}
 <ul>
     {% for department in dept %}
-    <li id="id_{{department.id}}">
+    <li>
         {{ department.deptName }}
         {% if perms.inventory.change_department %}
-        <button id="idEdit_{{department.id}}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deptModal">
+        <button type="button" class="btn btn-primary editDept" data-bs-toggle="modal"
+                data-bs-target="#deptModal" data-url="{% url 'inventory:ajax_edit_dept' department.id %}">
             {% trans 'Edit' %}
-            <script>
-                $("#idEdit_{{department.id}}").click(function (){
-                    const url = "{% url 'inventory:ajax_edit_dept' %}";
-                    $.ajax({
-                        url: url,
-                        type:'get',
-                        data:{
-                            'dept_id': "{{department.id}}"
-                        },
-                        success: function (data){
-                            $("#deptModalContent").html(data);
-                        }
-                    })
-                })
-            </script>
         </button>
         {% endif %}
     </li>
@@ -84,15 +69,15 @@
             )
         }
     )
+    $(".editDept").click(function () {
+        const url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function (data) {
+                $("#deptModalContent").html(data);
+            }
+        })
+    })
 
-    // $("#idEdit_'{{deparment.id}}'").click(function (){
-    //     const url = "{% url 'inventory:ajax_edit_dept' %}";
-    //     $.ajax({
-    //         url: url,
-    //         type:'get',
-    //         data:{
-    //             'dept_id': "{{department.id}}"
-    //         }
-    //     })
-    // })
 </script>
