@@ -4,19 +4,31 @@
 
 <p>
     {% if dept %}
-<ul>
+<table>
     {% for department in dept %}
-    <li>
-        {{ department.deptName }}
+    <tbody>
+    <tr>
+        <td>{{ department.deptName }}</td>
         {% if perms.inventory.change_department %}
-        <button type="button" class="btn btn-primary editDept" data-bs-toggle="modal"
-                data-bs-target="#deptModal" data-url="{% url 'inventory:ajax_edit_dept' department.id %}">
-            {% trans 'Edit' %}
-        </button>
+        <td>
+            <button type="button" class="btn btn-primary editDept" data-bs-toggle="modal"
+                    data-bs-target="#deptModal" data-url="{% url 'inventory:ajax_edit_dept' department.id %}">
+                {% trans 'Edit' %}
+            </button>
+        </td>
         {% endif %}
-    </li>
+        {% if perms.inventory.delete_department %}
+        <td>
+            <button type="button" class="btn btn-danger deleteDept" data-bs-toggle="modal"
+                    data-bs-target="#deptModalDelete" data-url="{% url 'inventory:ajax_delete_dept' department.id %}">
+                {% trans 'Delete' %}
+            </button>
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
     {% endfor %}
-</ul>
+</table>
 {% else %}
 <p>{% trans 'There are no Departments in this College' %}.</p>
 {% endif %}
@@ -56,15 +68,15 @@
             const newdept = $("#id_deptName").val();
             console.log(newdept);
             $.ajax({
-                url: url,
-                type: 'post',
-                data: {
-                    'college_id': collegeId,       // add the country id to the GET parameters
-                    'deptName': newdept
-                },
-                success: function (data) {
-                    $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
-                }
+                    url: url,
+                    type: 'post',
+                    data: {
+                        'college_id': collegeId,       // add the country id to the GET parameters
+                        'deptName': newdept
+                    },
+                    success: function (data) {
+                        $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                    }
                 }
             )
         }

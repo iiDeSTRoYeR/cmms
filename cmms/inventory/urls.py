@@ -33,5 +33,6 @@ urlpatterns = [
     path('places/college', views.CollegeListCreateView.as_view(), name='college_list'),
     path('ajax/load-dept/', views.load_departments.as_view(), name='ajax_load_dept'),
     path('ajax/<int:pk>/edit-dept', views.DepartmentUpdateView.as_view(), name='ajax_edit_dept'),
+    path('ajax/<int:pk>/delete-dept', views.DepartmentDeleteView.as_view(), name='ajax_delete_dept'),
     path('places/college/dropdown', views.CollegeDropdownView.as_view(), name='col_drop'),
 ]

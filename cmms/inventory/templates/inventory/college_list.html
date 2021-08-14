@@ -4,10 +4,6 @@
 {% block content %}
 {% load static%}
 
-{% block javascript %}
-  <script src="{% static 'books/js/books.js' %}"></script>
-{% endblock %}
-
 <h1>{% trans "Colleges" %}</h1>
 <h3 class="text-muted" id="mainCollegeTitle"></h3>
 <p>
@@ -25,7 +21,7 @@
 </div>
 
 {% if perms.inventory.add_college %}
-<button type="button" id="id_AddCollege" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bcollegeModal" >
+<button type="button" id="id_AddCollege" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bcollegeModal">
     {% trans 'Add a new College' %}
 </button>
 {% endif %}
@@ -36,9 +32,10 @@
 </div>
 
 <script>
-    $(document).ready(function (){
+
+    $(document).ready(function () {
         const url = "{% url 'inventory:col_drop' %}"
-        $.get(url).then(function(data) {
+        $.get(url).then(function (data) {
             $('#id_college').html(data);
         });
     })
@@ -80,9 +77,6 @@
         }
     )
 
-
-
 </script>
-
 
 {% endblock %}

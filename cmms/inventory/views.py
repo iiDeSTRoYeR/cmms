@@ -350,6 +350,9 @@ class DepartmentUpdateView(LoginRequiredMixin, UserAccessMixin, View):
 
         return JsonResponse(data)
 
+class DepartmentDeleteView(LoginRequiredMixin, UserAccessMixin, View):
+    pass
+
 class CollegeDropdownView(View):
     template_name = "inventory/college_list_dropdown.html"
 
