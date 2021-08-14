@@ -1,0 +1,7 @@
+{% load i18n %}
+<option selected>{%trans 'Please Select a College' %}</option>
+{% for college in college_list %}
+<option value="{{college.id}}">
+    {{ college.Name }}
+</option>
+{% endfor %}

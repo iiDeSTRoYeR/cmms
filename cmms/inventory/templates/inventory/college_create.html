@@ -25,24 +25,8 @@
 
 
 <script>
-    document.formHasErrors = {%if field1.errors %} console.log('true')  {% else %} console.log('false') {%endif %};
-</script>
-
-
-{% if not form.errors %}
-<script>
-$(document).ready(function () {
-        $("#closeModal").trigger('click');
-    }
-)
-</script>
-{%endif%}
-
-
-<script>
     $("#college_submit").click(
         function () {
-            console.log('Col Click');
             const url = $("#collegeModal").attr("data-col-url");
             const newcol = $("#id_Name").val();
             $.ajax({
@@ -52,8 +36,17 @@ $(document).ready(function () {
                     'Name': newcol
                 },
                 success: function (data) {
-                    $("#collegeModal").html(data);
-
+                    if (data.form_is_valid) {
+                        $("#bcollegeModal").modal("hide");
+                        const url = "{% url 'inventory:col_drop' %}";
+                        const last_id = data.last_id;
+                        $.get(url).then(function (data) {
+                            $('#id_college').html(data);
+                            $('#id_college').val(last_id).change();
+                        });
+                    } else {
+                        $("#collegeModal").html(data.html_form);
+                    }
                 }
             })
         }

@@ -5,15 +5,9 @@
 {% load static%}
 
 <h1>{% trans "Colleges" %}</h1>
+<h3 class="text-muted" id="mainCollegeTitle"></h3>
 <p>
     <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
-        <option selected>{%trans 'Please Select a College' %}</option>
-        {% for college in college_list %}
-        <option value="{{college.id}}">
-            <!--            onclick="getStoreView(e, {{college.id}})"-->
-            {{ college.Name }}
-        </option>
-        {% endfor %}
     </select>
 </p>
 
@@ -38,9 +32,17 @@
 </div>
 
 <script>
-    $("#id_college").change(function () {
+    $(document).ready(function (){
+        const url = "{% url 'inventory:col_drop' %}"
+        $.get(url).then(function(data) {
+            $('#id_college').html(data);
+        });
+    })
+
+    $("#id_college").change(function refreshDept() {
         const url = $("#id_college").attr("data-dept-url");  // get the url of the `load_cities` view
-        const collegeId = $(this).val();  // get the selected country ID from the HTML input
+        const collegeId = $("#id_college").val();  // get the selected country ID from the HTML input
+        const collegeName = $("#id_college option:selected").text()
         $.ajax({                       // initialize an AJAX request
             url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
             data: {
@@ -48,7 +50,7 @@
             },
             success: function (data) {   // `data` is the return of the `load_cities` view function
                 $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
-
+                $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
                 /*
                 let html_data = '<option value="">---------</option>';
                 data.forEach(function (city) {
@@ -63,18 +65,18 @@
 
     $("#id_AddCollege").click(
         function () {
-            console.log('Add Col Click');
             const url = $("#collegeModal").attr("data-col-url");
             $.ajax({
                 url: url,
                 type: 'post',
                 success: function (data) {
-                    console.log('Add Col Click');
-                    $("#collegeModal").html(data);
+                    $("#collegeModal").html(data.html_form);
                 }
             })
         }
     )
+
+
 
 </script>
 

@@ -140,6 +140,14 @@ class DepartmentForm(forms.ModelForm):
         model = Department
         fields = ['deptName']
 
+class DepartmentUpdateForm(forms.ModelForm):
+    deptName = forms.CharField(
+        required=True, label=_('Department Name'),
+        widget=forms.TextInput(attrs={'id': 'deptNameUpdate', 'class': 'form-control', 'placeholder': _('Electrical Engineering, Biology, etc...')})
+    )
+    class Meta:
+        model = Department
+        fields = ['deptName']
 
 # >>>>>>>>>>>>>>>>>>>>>>>> P L A C E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

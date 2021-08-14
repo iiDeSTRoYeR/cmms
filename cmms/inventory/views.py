@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import DeleteView, CreateView, ListView, DetailView, UpdateView
@@ -8,9 +8,13 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.db.utils import IntegrityError
+from django.forms.models import model_to_dict
+from django.template.loader import render_to_string
+from django.views.generic.base import TemplateView
 
 from .models import *
 from .forms import *
@@ -252,6 +256,7 @@ class AccDetailUpdateView(LoginRequiredMixin, UserAccessMixin, View):
 def PlacesMainView(request):
     return render(request, 'inventory/places_main.html', {})
 
+
 @method_decorator(csrf_exempt, name='dispatch')
 class load_departments(View):
     template_name = 'inventory/dept_list.html'
@@ -277,7 +282,7 @@ class load_departments(View):
             department1.college_id = college_id
             department1.save()
 
-            deptform = DepartmentForm()         #clears the form
+            deptform = DepartmentForm()  # clears the form
 
         return self.the_get(request, college_id, deptform)
 
@@ -285,15 +290,16 @@ class load_departments(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class CollegeListCreateView(View):
     template_name = 'inventory/college_list.html'
-    success_url = reverse_lazy('inventory:college_list')
 
     def get(self, request):
-        college_list = College.objects.order_by('Name')
-        collegeform = CollegeForm()
-        ctx = {'college_list': college_list, 'form': collegeform}
-        return render(request, self.template_name, ctx)
+        # college_list = College.objects.order_by('Name')
+        # ctx = {'college_list': college_list}
+        #html_college = render_to_string(self.template_name, ctx, request=request)
+        #return JsonResponse({'html_college': html_college})
+        return render(request, self.template_name)
 
     def post(self, request):
+        data = dict()
         print(request.POST)
         if request.POST == {}:
             collegeform = CollegeForm()
@@ -304,20 +310,72 @@ class CollegeListCreateView(View):
                 college.Name = collegeform.cleaned_data['Name']
                 college.save()
 
+                data['form_is_valid'] = True
+            else:
+                data['form_is_valid'] = False
+
         ctx = {'form': collegeform}
-        return render(request, 'inventory/college_create.html', ctx)
 
-        #return redirect(reverse('inventory:college_list'))
+        data['html_form'] = render_to_string(
+            'inventory/college_create.html',
+            ctx,
+            request=request)
 
+        data['last_id'] = College.objects.last().id
+        return JsonResponse(data)
+        #return render(request, 'inventory/college_create.html', ctx)
+
+dept_id = None
+@method_decorator(csrf_exempt, name='dispatch')
 class DepartmentUpdateView(LoginRequiredMixin, UserAccessMixin, View):
     permission_required = 'department.change_department'
-    template_name = 'inventory/dept_list.html'
+    template_name = 'inventory/dept_update.html'
 
-    def get(self, request, pk):
-        dept = Department.objects.get(id=pk)
-        deptUpdateform = DepartmentForm(initial={'deptName': dept.Name})
-        ctx = {'deptUpdateform': deptUpdateform}
+    def get(self, request):
+        global dept_id
+        dept_id = request.GET.get('dept_id')
+        dept = Department.objects.get(id=dept_id)
+        deptUpdateForm = DepartmentUpdateForm(initial={'deptName': dept})
+        ctx = {'deptUpdateForm': deptUpdateForm}
         return render(request, self.template_name, ctx)
+
+    def post(self, request):
+        data = dict()
+        global dept_id
+        college_id = request.POST.get('college_id')
+        deptUpdateForm = DepartmentUpdateForm(request.POST)
+        print(request.POST)
+        if deptUpdateForm.is_valid():
+            department = Department()
+            department.deptName = deptUpdateForm.cleaned_data['deptName']
+            department.college_id = college_id
+            department.id = dept_id
+            department.save()
+
+            data['form_is_valid'] = True
+        else:
+            data['form_is_valid'] = False
+
+        dept = Department.objects.filter(college=college_id).values()
+        ctx = {'deptUpdateForm': deptUpdateForm}
+
+        data['html_updateform'] = render_to_string(
+            self.template_name,
+            ctx,
+            request=request
+        )
+
+        return JsonResponse(data)
+        #return render(request, self.template_name, ctx)
+
+class CollegeDropdownView(View):
+    template_name = "inventory/college_list_dropdown.html"
+
+    def get(self, request):
+        college_list = College.objects.order_by('Name')
+        ctx = {'college_list': college_list}
+        return render(request, self.template_name, ctx)
+
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>> P L A C E S  ----  END >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

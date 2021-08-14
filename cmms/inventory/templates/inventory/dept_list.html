@@ -1,15 +1,32 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 <h1>{% trans "Departments" %}</h1>
+
+
 <p>
     {% if dept %}
 <ul>
     {% for department in dept %}
-    <li>
+    <li id="id_{{department.id}}">
         {{ department.deptName }}
-        {% if user.is_authenticated %}
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deptModal">
+        {% if perms.inventory.change_department %}
+        <button id="idEdit_{{department.id}}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deptModal">
             {% trans 'Edit' %}
+            <script>
+                $("#idEdit_{{department.id}}").click(function (){
+                    const url = "{% url 'inventory:ajax_edit_dept' %}";
+                    $.ajax({
+                        url: url,
+                        type:'get',
+                        data:{
+                            'dept_id': "{{department.id}}"
+                        },
+                        success: function (data){
+                            $("#deptModalContent").html(data);
+                        }
+                    })
+                })
+            </script>
         </button>
         {% endif %}
     </li>
@@ -19,6 +36,8 @@
 <p>{% trans 'There are no Departments in this College' %}.</p>
 {% endif %}
 </p>
+
+
 {% if perms.inventory.add_department %}
 <form action="">
     {% csrf_token %}
@@ -38,22 +57,8 @@
 
 <div class="modal fade" id="deptModal" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{% trans 'Edit a Department' %}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ deptUpdateform | crispy}}
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{%trans 'Cancel'%}
-                        </button>
-                        <input type="submit" value="{%trans 'Submit'%}" class="btn btn-primary"></input>
-                    </div>
-                </form>
-            </div>
+        <div class="modal-content" id="deptModalContent">
+
         </div>
     </div>
 </div>
@@ -64,19 +69,30 @@
             const url = $("#id_college").attr("data-dept-url");
             const collegeId = $("#id_college").val();
             const newdept = $("#id_deptName").val();
-            console.log(collegeId);
+            console.log(newdept);
             $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: {
-                        'college_id': collegeId,       // add the country id to the GET parameters
-                        'deptName': newdept
-                    },
-                    success: function (data) {
-                        $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
-                    }
+                url: url,
+                type: 'post',
+                data: {
+                    'college_id': collegeId,       // add the country id to the GET parameters
+                    'deptName': newdept
+                },
+                success: function (data) {
+                    $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                }
                 }
             )
         }
     )
+
+    // $("#idEdit_'{{deparment.id}}'").click(function (){
+    //     const url = "{% url 'inventory:ajax_edit_dept' %}";
+    //     $.ajax({
+    //         url: url,
+    //         type:'get',
+    //         data:{
+    //             'dept_id': "{{department.id}}"
+    //         }
+    //     })
+    // })
 </script>

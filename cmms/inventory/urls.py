@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.views.generic import TemplateView
 from . import views
 
 app_name = 'inventory'
@@ -32,4 +32,6 @@ urlpatterns = [
     path('places/', views.PlacesMainView, name='places_main'),
     path('places/college', views.CollegeListCreateView.as_view(), name='college_list'),
     path('ajax/load-dept/', views.load_departments.as_view(), name='ajax_load_dept'),
+    path('ajax/edit-dept/', views.DepartmentUpdateView.as_view(), name='ajax_edit_dept'),
+    path('places/college/dropdown', views.CollegeDropdownView.as_view(), name='col_drop'),
 ]

@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{% trans 'Edit a Department' %}</h5>
+    <button type="button" class="btn-close" id="closeUpdateModal" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form action="" method="">
+        {% csrf_token %}
+        {% for field1 in deptUpdateForm %}
+        <div class="form-group {% if field1.errors %}alert alert-danger{% endif %}">
+            {{ field1.errors }}
+            {{ field1.label_tag }}
+            {{ field1 }}
+        </div>
+        {% endfor %}
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">{%trans 'Cancel'%}
+        </button>
+        <button class="btn btn-primary mt-2" id="deptModal_submit">{%trans 'Submit'%}</button>
+    </div>
+</div>
+
+
+<script>
+    $("#deptModal_submit").click(function () {
+        const url = "{% url 'inventory:ajax_edit_dept' %}";
+        const newdept = $("#deptNameUpdate").val();
+        const collegeId = $("#id_college").val();  // get the selected country ID from the HTML input
+        console.log(newdept);
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                'deptName': newdept,
+                'college_id': collegeId
+            },
+            success: function (data) {
+                $("#deptModalContent").html(data.html_updateform);
+                if (data.form_is_valid) {
+                    $("#deptModal").modal("hide");
+                    console.log('Im alliiivveee');
+                    const url = $("#id_college").attr("data-dept-url");  // get the url of the `load_cities` view
+                    const collegeId = $("#id_college").val();  // get the selected country ID from the HTML input
+                    const collegeName = $("#id_college option:selected").text()
+                    $.ajax({                       // initialize an AJAX request
+                        url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+                        data: {
+                            'college_id': collegeId       // add the country id to the GET parameters
+                        },
+                        success: function (data) {   // `data` is the return of the `load_cities` view function
+                            $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                            $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
+                        }
+                    });
+                }
+            }
+        })
+    })
+
+</script>
