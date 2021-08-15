@@ -1,0 +1,43 @@
+{% load i18n %}
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{% trans 'Delete A Department' %}</h5>
+    <button type="button" class="btn-close" id="closeUpdateModal" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <p>{% trans 'Are you sure you want to delete the department: ' %}<strong>{{ dept }}</strong>{% trans '?' %}</p>
+    <form class="deptDeleteForm" data-url="{% url 'inventory:ajax_delete_dept' dept.id %}">
+    </form>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">{%trans 'Cancel'%}
+        </button>
+        <button class="btn btn-danger mt-2" id="deptModalDelete_submit">{%trans 'Submit'%}</button>
+    </div>
+</div>
+
+
+<script>
+    $("#deptModalDelete_submit").click(function () {
+        const url = $('.deptDeleteForm').attr("data-url");
+        console.log(url);
+        $.ajax({
+            url: url,
+            type: 'post',
+            success: function (data) {
+                $("#deptModalDelete").modal("hide");
+                const url = $("#id_college").attr("data-dept-url");  // get the url of the `load_cities` view
+                const collegeId = $("#id_college").val();  // get the selected country ID from the HTML input
+                const collegeName = $("#id_college option:selected").text()
+                $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+                    data: {
+                        'college_id': collegeId       // add the country id to the GET parameters
+                    },
+                    success: function (data) {   // `data` is the return of the `load_cities` view function
+                        $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                        $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
+                    }
+                });
+            }
+        })
+    })
+</script>

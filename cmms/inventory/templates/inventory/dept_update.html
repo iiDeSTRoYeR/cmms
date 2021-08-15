@@ -1,11 +1,10 @@
 {% load i18n %}
-{% load crispy_forms_tags %}
 <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">{% trans 'Edit a Department' %}</h5>
     <button type="button" class="btn-close" id="closeUpdateModal" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <form action="" method="">
+    <form action="{% url 'inventory:ajax_edit_dept' deptUpdateForm.instance.pk %}" method="" class="deptUpdateForm">
         {% csrf_token %}
         {% for field1 in deptUpdateForm %}
         <div class="form-group {% if field1.errors %}alert alert-danger{% endif %}">
@@ -25,7 +24,7 @@
 
 <script>
     $("#deptModal_submit").click(function () {
-        const url = $('.editDept').attr("data-url");
+        const url = $('.deptUpdateForm').attr("action");
         const newdept = $("#deptNameUpdate").val();
         $.ajax({
             url: url,

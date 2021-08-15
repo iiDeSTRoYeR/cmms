@@ -350,8 +350,21 @@ class DepartmentUpdateView(LoginRequiredMixin, UserAccessMixin, View):
 
         return JsonResponse(data)
 
+@method_decorator(csrf_exempt, name='dispatch')
 class DepartmentDeleteView(LoginRequiredMixin, UserAccessMixin, View):
-    pass
+    permission_required = 'department.delete_department'
+    template_name = 'inventory/dept_del.html'
+
+    def get(self, request, pk):
+        dept = get_object_or_404(Department, pk=pk)
+        print(dept)
+        ctx = {'dept': dept}
+        return render(request, self.template_name, ctx)
+
+    def post(self, request, pk):
+        dept = get_object_or_404(Department, pk=pk)
+        dept.delete()
+        return HttpResponse('')
 
 class CollegeDropdownView(View):
     template_name = "inventory/college_list_dropdown.html"
