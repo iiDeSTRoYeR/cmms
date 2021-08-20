@@ -7,23 +7,23 @@
 <head>
     <!-- Edit dj4e-samples/settings.py and add APP_NAME = 'DJ4E Samples' or similar -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {{ settings.APP_NAME }} {% endblock %}</title>
     {% block head %} {% endblock %}
-    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'semantic-ui/semantic.min.css'%}">
     <link rel="stylesheet" href="{% static 'custom.css' %}?=42">
-    <script src={% static 'main.js' %} defer></script>
-    <script src={% static 'semantic.js' %} defer></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-    crossorigin="anonymous"></script>
+    <script src="{% static 'jquery-3.6.0.js' %}"></script>
     <script src="{%static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'semantic-ui/semantic.min.js' %}"></script>
 </head>
 
 <body>
 
 {% block navbar %} {% endblock %}
-<div class="container">
+
     {% block welcome %} {% endblock %}
     {% block messages %}
     {% if messages %}
@@ -36,7 +36,7 @@
     {% endblock %}
     {% block content %}
     {% endblock %}
-</div>
+
 {% block footer %} {% endblock %}
 
 {% block javascript %}

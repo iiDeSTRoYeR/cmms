@@ -4,33 +4,61 @@
 {% block content %}
 {% load static%}
 
-<h1>{% trans "Colleges" %}</h1>
-<h3 class="text-muted" id="mainCollegeTitle"></h3>
-<p>
-    <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
-    </select>
-</p>
+<!--<div class="row">-->
+<!--    <div class="column padding-reset">-->
+<!--        <div class="ui massive message page grid center aligned olive attached">-->
+<!--            <span class="ui huge header" style="color: #2c3034">{% trans "Colleges" %}</span>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
-<div class="modal fade" tabindex="-1" id="bcollegeModal">
-    <div class="modal-dialog">
-        <div class="modal-content" id="collegeModal" data-col-url="{%url 'inventory:college_list' %}">
+<section class="jumbotron jumbotron-fluid bg-light text-center">
+    <div class="container">
+        <br><br>
+        <span class="ui huge header" style="font-size: 4em;">{% trans "Colleges" %}</span>
+        <br><br><br>
+    </div>
+</section>
+<br><br>
+<div class="ui container">
+    <div class="ui relaxed grid">
+        <div class="row">
+            <div class="eight wide column">
+                <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
+                </select>
+            </div>
+
+
+            {% if perms.inventory.add_college %}
+            <div class="four wide column">
+                <div id="id_AddCollege" class="ui animated fade button fluid primary" data-bs-toggle="modal"
+                     data-bs-target="#bcollegeModal">
+                    <div class="visible content">
+                        <i class="ui icon plus"></i>
+                    </div>
+                    <div class="hidden content">
+                        {% trans 'Add a College' %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <h3 class="text-muted" id="mainCollegeTitle"></h3>
+
+        <div id="id_depts">
 
         </div>
     </div>
 </div>
 
-{% if perms.inventory.add_college %}
-<button type="button" id="id_AddCollege" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bcollegeModal">
-    {% trans 'Add a new College' %}
-</button>
-{% endif %}
-
-
-<div id="id_depts">
-
+<div class="modal fade" tabindex="-1" id="bcollegeModal">
+    <div class="modal-dialog">
+        <div class="modal-content" id="collegeModal" data-col-url="{%url 'inventory:college_list' %}">
+        </div>
+    </div>
 </div>
-
 <script>
 
     $(document).ready(function () {
