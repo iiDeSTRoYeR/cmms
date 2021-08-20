@@ -260,17 +260,25 @@ def PlacesMainView(request):
 class load_departments(View):
     template_name = 'inventory/dept_list.html'
 
-    def the_get(self, request, college_id, deptform):
+    def the_get(self, request, college_id, deptform, data):
         dept = Department.objects.filter(college=college_id).order_by('deptName')
         ctx = {'dept': dept, 'deptform': deptform}
-        return render(request, self.template_name, ctx)
+        data['html_addform'] = render_to_string(
+            self.template_name,
+            ctx,
+            request=request
+        )
+
+        return JsonResponse(data)
 
     def get(self, request):
+        data=dict()
         college_id = request.GET.get('college_id')
         deptform = DepartmentForm()
-        return self.the_get(request, college_id, deptform)
+        return self.the_get(request, college_id, deptform, data)
 
     def post(self, request):
+        data=dict()
         college_id = request.POST.get('college_id')
         deptform = DepartmentForm(request.POST)
         print(request.POST)
@@ -281,8 +289,9 @@ class load_departments(View):
             department1.save()
 
             deptform = DepartmentForm()  # clears the form
+            data['form_is_valid'] = True
 
-        return self.the_get(request, college_id, deptform)
+        return self.the_get(request, college_id, deptform, data)
 
 
 @method_decorator(csrf_exempt, name='dispatch')

@@ -23,6 +23,8 @@
 
 
 <script>
+    //{% trans "Edited" as deptAction %}
+    //{%trans "Department" as thing%}
     $("#deptModal_submit").click(function () {
         const url = $('.deptUpdateForm').attr("action");
         const newdept = $("#deptNameUpdate").val();
@@ -45,7 +47,9 @@
                             'college_id': collegeId       // add the country id to the GET parameters
                         },
                         success: function (data) {   // `data` is the return of the `load_cities` view function
-                            $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                            $("#id_depts").html(
+                                {% include 'inventory/ajax_alert.html' with deptAction=deptAction alertColor='warning' thing=thing  %}+
+                                data.html_addform);  // replace the contents of the city input with the data that came from the server
                             $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
                         }
                     });

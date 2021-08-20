@@ -1088,15 +1088,15 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 
 /* Fade */
 
-.ui.fade.animated.button .visible.content,
-.ui.fade.animated.button .hidden.content {
+.ui.fade1.animated.button .visible.content,
+.ui.fade1.animated.button .hidden.content {
   -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
   transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
   transition: opacity 0.3s ease, transform 0.3s ease;
   transition: opacity 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
 }
 
-.ui.fade.animated.button .visible.content {
+.ui.fade1.animated.button .visible.content {
   left: auto;
   right: auto;
   opacity: 1;
@@ -1104,7 +1104,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   transform: scale(1);
 }
 
-.ui.fade.animated.button .hidden.content {
+.ui.fade1.animated.button .hidden.content {
   opacity: 0;
   left: 0%;
   right: auto;
@@ -1112,8 +1112,8 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   transform: scale(1.5);
 }
 
-.ui.fade.animated.button:focus .visible.content,
-.ui.fade.animated.button:hover .visible.content {
+.ui.fade1.animated.button:focus .visible.content,
+.ui.fade1.animated.button:hover .visible.content {
   left: auto;
   right: auto;
   opacity: 0;
@@ -1121,8 +1121,8 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   transform: scale(0.75);
 }
 
-.ui.fade.animated.button:focus .hidden.content,
-.ui.fade.animated.button:hover .hidden.content {
+.ui.fade1.animated.button:focus .hidden.content,
+.ui.fade1.animated.button:hover .hidden.content {
   left: 0%;
   right: auto;
   opacity: 1;

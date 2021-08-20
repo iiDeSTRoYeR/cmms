@@ -69,6 +69,8 @@
 </div>
 
 <script>
+    //{% trans "Added" as deptAction %}
+    //{%trans "Department" as thing%}
     $("#dept_submit").click(
         function () {
             const url = $("#id_college").attr("data-dept-url");
@@ -83,7 +85,14 @@
                     'deptName': newdept
                 },
                 success: function (data) {
-                    $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
+                    if (data.form_is_valid){
+                    $("#id_depts").html(
+                        {% include 'inventory/ajax_alert.html' with deptAction=deptAction alertColor='success' thing=thing %}+
+                        data.html_addform);  // replace the contents of the city input with the data that came from the server
+                        }
+                    else{
+                        $("#id_depts").html(data.html_addform);
+                    }
                 }
                 }
             )

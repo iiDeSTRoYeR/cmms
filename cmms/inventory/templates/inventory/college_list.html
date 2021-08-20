@@ -14,44 +14,52 @@
 
 
 <section class="jumbotron jumbotron-fluid bg-light text-center">
-    <div class="container">
+    <div class="container-fluid">
         <br><br>
-        <span class="ui huge header" style="font-size: 4em;">{% trans "Colleges" %}</span>
+        <h1 style="font-size: 4em;">{% trans "Colleges" %}</h1>
         <br><br><br>
     </div>
 </section>
 <br><br>
-<div class="ui container">
-    <div class="ui relaxed grid">
-        <div class="row">
-            <div class="eight wide column">
-                <select class="form-select" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
-                </select>
-            </div>
 
+<div id="colalert"></div>
 
-            {% if perms.inventory.add_college %}
-            <div class="four wide column">
-                <div id="id_AddCollege" class="ui animated fade button fluid primary" data-bs-toggle="modal"
-                     data-bs-target="#bcollegeModal">
-                    <div class="visible content">
-                        <i class="ui icon plus"></i>
-                    </div>
-                    <div class="hidden content">
-                        {% trans 'Add a College' %}
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-8">
+            <select class="ui fluid search dropdown" id="id_college" data-dept-url="{% url 'inventory:ajax_load_dept' %}">
+            </select>
+        </div>
+
+        {% if perms.inventory.add_college %}
+        <div class="col-4">
+            <div id="id_AddCollege" class="ui fade1 animated small button fluid primary" data-bs-toggle="modal"
+                 data-bs-target="#bcollegeModal" style="margin-bottom: 2em;">
+                <div class="visible content">
+                    <i class="ui icon plus"></i>
+                </div>
+                <div class="hidden content" style="font-size: x-small;">
+                    {% trans 'Add a College' %}
                 </div>
             </div>
-            {% endif %}
         </div>
+        {% endif %}
+    </div>
 
-        <h3 class="text-muted" id="mainCollegeTitle"></h3>
 
-        <div id="id_depts">
+</div>
+<div class="">
+    <h3 id="mainCollegeTitle" style="min-height: 3em; ">
+    </h3>
+</div>
 
-        </div>
+<div class="container-fluid">
+    <div id="id_depts">
+
     </div>
 </div>
+
 
 <div class="modal fade" tabindex="-1" id="bcollegeModal">
     <div class="modal-dialog">
@@ -78,8 +86,10 @@
                 'college_id': collegeId       // add the country id to the GET parameters
             },
             success: function (data) {   // `data` is the return of the `load_cities` view function
-                $("#id_depts").html(data);  // replace the contents of the city input with the data that came from the server
-                $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
+                $("#id_depts").html(data.html_addform);  // replace the contents of the city input with the data that came from the server
+                $("#mainCollegeTitle").text(collegeName);
+                $("#mainCollegeTitle").addClass('jumbotron jumbotron-fluid text-muted fs-2 d-flex justify-content-center align-items-center');
+                $("#mainCollegeTitle").css('background-color', "#fcf6e2");
                 /*
                 let html_data = '<option value="">---------</option>';
                 data.forEach(function (city) {
@@ -105,6 +115,7 @@
         }
     )
 
+    $('.ui.search.dropdown').dropdown({ fullTextSearch: true, keepOnScreen: true, direction: 'upward' });
 </script>
 
 {% endblock %}

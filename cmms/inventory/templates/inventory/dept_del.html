@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body">
     <p>{% trans 'Are you sure you want to delete the department: ' %}<strong>{{ dept }}</strong>{% trans '?' %}</p>
-    <form class="deptDeleteForm" data-url="{% url 'inventory:ajax_delete_dept' dept.id %}">
+    <form class="deptDeleteForm" data-url="{% url 'inventory:ajax_delete_dept' dept.id %}" data-deleted="{{dept}}">
     </form>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">{%trans 'Cancel'%}
@@ -16,6 +16,8 @@
 
 
 <script>
+    //{% trans "Deleted" as deptAction %}
+    //{%trans "Department" as thing%}
     $("#deptModalDelete_submit").click(function () {
         const url = $('.deptDeleteForm').attr("data-url");
         console.log(url);
@@ -34,8 +36,8 @@
                     },
                     success: function (data) {   // `data` is the return of the `load_cities` view function
                         $("#id_depts").html(
-                            {% include 'inventory/ajax_alert.html' with deptAction='Deleted' alertColor='danger' %}
-                            +data);  // replace the contents of the city input with the data that came from the server
+                            {% include 'inventory/ajax_alert.html' with deptAction=deptAction alertColor='danger' deptActionName=dept thing=thing %}
+                            +data.html_addform);  // replace the contents of the city input with the data that came from the server
                         $("#mainCollegeTitle").text("{%trans 'College' %}: " + collegeName);
                     }
                 });

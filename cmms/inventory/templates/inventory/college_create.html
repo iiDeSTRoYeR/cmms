@@ -25,6 +25,8 @@
 
 
 <script>
+    //{% trans "Added" as deptAction %}
+    //{%trans "College" as thing%}
     $("#college_submit").click(
         function () {
             const url = $("#collegeModal").attr("data-col-url");
@@ -37,6 +39,10 @@
                 },
                 success: function (data) {
                     if (data.form_is_valid) {
+                        let newdept=newcol;
+                        $('#colalert').html(
+                            {% include 'inventory/ajax_alert.html' with deptAction=deptAction alertColor='success' thing=thing %}
+                        )
                         $("#bcollegeModal").modal("hide");
                         const url = "{% url 'inventory:col_drop' %}";
                         const last_id = data.last_id;
